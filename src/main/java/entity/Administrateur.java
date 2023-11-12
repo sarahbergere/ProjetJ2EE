@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Table(name = "admin")
 public class Administrateur {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idAdmin")
     private int id;
 
@@ -20,9 +21,9 @@ public class Administrateur {
     @Column(name = "NumeroTelephone")
     private String numeroTelephone;
 
-    @OneToOne
-    @JoinColumn(name = "idAdmin")
-    private Utilisateur utilisateur;
+    @Column(name = "idUtilisateur")
+    private int idUtilisateur;
+
 
     public int getId() {
         return id;
@@ -62,11 +63,11 @@ public class Administrateur {
         this.numeroTelephone = numeroTelephone;
     }
 
-    public Utilisateur getUtilisateur() {
-        return utilisateur;
+    public int getIdUtilisateur() {
+        return idUtilisateur;
     }
 
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
+    public void setIdUtilisateur(int idUtilisateur) {
+        this.idUtilisateur = idUtilisateur;
     }
 }

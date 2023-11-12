@@ -3,13 +3,17 @@ package dao;
 import entity.Client;
 
 import javax.persistence.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.List;
 
 public class ClientDAO {
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Persistence");
+
+    public ClientDAO(){
+
+    }
+    public ClientDAO(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
+    }
 
     public void create(Client client) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -31,7 +35,7 @@ public class ClientDAO {
 
     public Client findByUsername(String username) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        String jpql = "SELECT c FROM Client c WHERE c.utilisateur.pseudo = :username";
+        String jpql = "SELECT c FROM Client c WHERE c.idUtilisateur = (SELECT u.id FROM Utilisateur u WHERE u.pseudo = :username)";
         Query query = entityManager.createQuery(jpql, Client.class);
         query.setParameter("username", username);
 
@@ -45,7 +49,7 @@ public class ClientDAO {
     }
     public String getPasswordById(int clientId) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        String jpql = "SELECT u.motDePasse FROM Utilisateur u WHERE u.idUtilisateur = :clientId";
+        String jpql = "SELECT u.motDePasse FROM Utilisateur u JOIN Client c ON u.id = c.idUtilisateur WHERE c.idUtilisateur = :clientId";
         Query query = entityManager.createQuery(jpql, String.class);
         query.setParameter("clientId", clientId);
 
@@ -108,4 +112,3 @@ public class ClientDAO {
         }
     }
 }
-

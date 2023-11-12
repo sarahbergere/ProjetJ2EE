@@ -10,14 +10,25 @@ import javax.persistence.Persistence;
 public class UtilisateurDAO {
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Persistence");
 
-    public void create(Utilisateur utilisateur) {
+    public UtilisateurDAO(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
+    }
+
+    public UtilisateurDAO(){
+
+    }
+
+    public int create(Utilisateur utilisateur) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
 
+        int generatedId = 0;
         try {
             transaction.begin();
             entityManager.persist(utilisateur);
             transaction.commit();
+
+            generatedId = utilisateur.getId();
         } catch (Exception e) {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
@@ -26,6 +37,7 @@ public class UtilisateurDAO {
         } finally {
             entityManager.close();
         }
+        return generatedId;
     }
 
     public Utilisateur findById(Long id) {

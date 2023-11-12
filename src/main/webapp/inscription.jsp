@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Inscription</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -31,7 +31,10 @@
             color: #333;
         }
 
-        input[type="text"], input[type="password"] {
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="tel"] {
             width: 100%;
             padding: 8px;
             margin-bottom: 20px;
@@ -54,23 +57,23 @@
         }
 
         p {
-            text-align: center;
+            text-align: center;;
             color: red;
         }
 
-        a#inscription {
+        a#connecte {
             color: #337ab7;
             text-decoration: none;
             position: relative;
             display: inline-block;
         }
 
-        a#inscription::before {
+        a#connecte::before {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
-            color: #337ab7;;
+            color: #337ab7;
             width: 100%;
             height: 1px;
             background-color: #333;
@@ -79,24 +82,38 @@
             transition: transform 0.3s ease-in-out;
         }
 
-        a#inscription:hover::before {
+        a#connecte:hover::before {
             transform: scaleX(1);
         }
     </style>
 </head>
 <body>
-<h1>Login</h1>
-<form method="post" action="LoginServlet">
+<h1>Inscription</h1>
+<form method="post" action="RegisterServlet">
+    <p><%= request.getAttribute("message") %></p>
     <label for="pseudo">Nom d'utilisateur:</label>
     <input type="text" name="pseudo" id="pseudo" required><br><br>
+
+    <label for="nom">Nom:</label>
+    <input type="text" name="nom" id="nom" required><br><br>
+
+    <label for="prenom">Prenom:</label>
+    <input type="text" name="prenom" id="prenom" required><br><br>
+
+    <label for="adresse">Adresse:</label>
+    <input type="text" name="adresse" id="adresse" required><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required><br><br>
+
+    <label for="telephone">Telephone:</label>
+    <input type="tel" name="telephone" id="telephone" required><br><br>
 
     <label for="password">Mot de passe:</label>
     <input type="password" name="password" id="password" required><br><br>
 
-    <input type="submit" value="Se connecter"><br><br>
-    <a id="inscription" href="RegisterServlet">Inscrivez-vous</a>
+    <input type="submit" value="S'inscrire"><br><br>
+    <a id="connecte" href="LoginServlet">Connectez-vous</a>
 </form>
-<p><%= request.getAttribute("message") %>
-</p>
 </body>
 </html>

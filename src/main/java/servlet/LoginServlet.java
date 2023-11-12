@@ -14,15 +14,16 @@ import java.io.IOException;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, IOException {
-        String login = request.getParameter("param1");
-        String password = request.getParameter("param2");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String message = "";
+        String login = request.getParameter("pseudo");
+        String password = request.getParameter("password");
 
         // Vérifiez si l'utilisateur est un client
         ClientDAO clientDAO = new ClientDAO();
         Client client = clientDAO.findByUsername(login);
 
-        if (client != null && clientDAO.getPasswordById(client.getId()).equals(password)) {
+        if (client != null && clientDAO.getPasswordById(client.getIdUtilisateur()).equals(password)) {
             // Utilisateur client, redirigez-le vers la page du client
             request.getRequestDispatcher("/client.jsp").forward(request, response);
             return;
@@ -32,22 +33,23 @@ public class LoginServlet extends HttpServlet {
         AdministrateurDAO administrateurDAO = new AdministrateurDAO();
         Administrateur administrateur = administrateurDAO.findByUsername(login);
 
-        if (administrateur != null && administrateurDAO.getPasswordById(administrateur.getId()).equals(password)) {
-            // Administrateur, redirigez-le vers la page de l'administrateur
+
+        if (administrateur != null && administrateurDAO.getPasswordById(administrateur.getIdUtilisateur()).equals(password)) {
             request.getRequestDispatcher("/admin.jsp").forward(request, response);
             return;
         }
 
         // Les identifiants sont incorrects, afficher un message d'erreur
-        response.setContentType("text/html");
-        response.getWriter().println("<html><body>");
-        response.getWriter().println("<h1>Erreur de Connexion</h1>");
-        response.getWriter().println("<p>Identifiants incorrects. Veuillez réessayer.</p>");
-        response.getWriter().println("</body></html>");
+
+        message = "Le nom d'utilisateur ou le mot de passe est incorrect. Veuillez réessayer.";
+        request.setAttribute("message",message);
+        request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String message = "";
         // Afficher la page de login lorsque la requête GET est reçue
+        request.setAttribute("message",message);
         request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
 }

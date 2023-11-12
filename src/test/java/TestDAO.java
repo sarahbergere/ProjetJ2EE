@@ -89,7 +89,7 @@ public class TestDAO {
         // Vous pouvez créer un client factice avec seulement l'ID
         Client client = new Client();
         client.setId(clientId);
-        client.setAdresseEmail("ndeugouema@cy-tech.fr");
+        client.setEmail("ndeugouema@cy-tech.fr");
         client.setNumeroTelephone("0612345678");
         client.setNom("Ndeugoue");
         client.setPrenom("Marcus");

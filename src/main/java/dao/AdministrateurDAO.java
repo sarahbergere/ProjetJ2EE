@@ -44,8 +44,7 @@ public class AdministrateurDAO {
 
     public Administrateur findByUsername(String username) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        // Utilisez une requête JPQL pour rechercher un client par nom d'utilisateur
-        String jpql = "SELECT a FROM Administrateur a WHERE a.utilisateur.pseudo = :username";
+        String jpql = "SELECT a FROM Administrateur a WHERE a.idUtilisateur = (SELECT u.id FROM Utilisateur u WHERE u.pseudo = :username)";
         Query query = entityManager.createQuery(jpql, Administrateur.class);
         query.setParameter("username", username);
 
@@ -54,13 +53,12 @@ public class AdministrateurDAO {
         if (admins.size() > 0) {
             return admins.get(0);
         }
-
         return null;
     }
 
     public String getPasswordById(int adminId) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        String jpql = "SELECT u.motDePasse FROM Utilisateur u WHERE u.idUtilisateur = :adminId";
+        String jpql = "SELECT u.motDePasse FROM Utilisateur u JOIN Administrateur a ON u.id = a.idUtilisateur WHERE a.idUtilisateur = :adminId";
         Query query = entityManager.createQuery(jpql, String.class);
         query.setParameter("adminId", adminId);
 

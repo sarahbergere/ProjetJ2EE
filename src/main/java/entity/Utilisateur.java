@@ -6,8 +6,8 @@ import javax.persistence.*;
 public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idUtilisateur")
-    private int idUtilisateur;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "pseudo")
     private String pseudo;
@@ -21,11 +21,11 @@ public class Utilisateur {
 
 
     public int getId() {
-        return idUtilisateur;
+        return id;
     }
 
     public void setId(int id) {
-        this.idUtilisateur = id;
+        this.id = id;
     }
 
     public String getPseudo() {

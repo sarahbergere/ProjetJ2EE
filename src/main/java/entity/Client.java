@@ -7,6 +7,7 @@ import java.util.List;
 @Table(name = "client")
 public class Client {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idclient")
     private int id;
 
@@ -25,9 +26,9 @@ public class Client {
     @Column(name = "Telephone")
     private String numeroTelephone;
 
-    @OneToOne
-    @JoinColumn(name = "idclient")
-    private Utilisateur utilisateur;
+
+    @Column(name = "idUtilisateur")
+    private int idUtilisateur;
 
     @OneToMany(mappedBy = "client")
     private List<CompteBancaire> comptesBancaires;
@@ -67,11 +68,11 @@ public class Client {
         this.adresse = adresse;
     }
 
-    public String getAdresseEmail() {
+    public String getEmail() {
         return adresseEmail;
     }
 
-    public void setAdresseEmail(String adresseEmail) {
+    public void setEmail(String adresseEmail) {
         this.adresseEmail = adresseEmail;
     }
 
@@ -83,12 +84,12 @@ public class Client {
         this.numeroTelephone = numeroTelephone;
     }
 
-    public Utilisateur getUtilisateur() {
-        return utilisateur;
+    public int getIdUtilisateur() {
+        return idUtilisateur;
     }
 
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
+    public void setIdUtilisateur(int idUtilisateur) {
+        this.idUtilisateur = idUtilisateur;
     }
 
     public List<CompteBancaire> getComptesBancaires() {
