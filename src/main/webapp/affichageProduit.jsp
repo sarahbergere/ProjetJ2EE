@@ -11,6 +11,49 @@
             background: linear-gradient(to bottom right, #FFD2E5, #AAD8FF); /* Utilisez les couleurs pastel de votre choix */
         }
 
+        .neumorphic-header {
+            background-color: #f0f0f0; /* Couleur de fond */
+            border-radius: 15px; /* Rayon des bords */
+            box-shadow: 5px 5px 10px #bcbcbc, -5px -5px 10px #ffffff; /* Ombre neumorphique */
+            padding: 15px; /* Espacement intérieur */
+            margin-bottom: 20px; /* Marge inférieure */
+            display: flex; /* Utilisation de flexbox pour aligner les éléments horizontalement */
+            justify-content: space-between; /* Alignement des éléments sur l'espace disponible */
+            align-items: center; /* Alignement vertical au centre */
+        }
+
+        .neumorphic-header button {
+            padding: 0.5em 1.5em;
+            background: #efefef;
+            border: none;
+            border-radius: .5rem;
+            color: #444;
+            font-size: 1rem;
+            font-weight: 700;
+            text-align: center;
+            outline: none;
+            cursor: pointer;
+            transition: .2s ease-in-out;
+            box-shadow: -6px -6px 14px rgba(255, 255, 255, .7),
+            -6px -6px 10px rgba(255, 255, 255, .5),
+            6px 6px 8px rgba(255, 255, 255, .075),
+            6px 6px 10px rgba(0, 0, 0, .15);
+        }
+
+        .neumorphic-header button:hover {
+            box-shadow: -2px -2px 6px rgba(255, 255, 255, .6),
+            -2px -2px 4px rgba(255, 255, 255, .4),
+            2px 2px 2px rgba(255, 255, 255, .05),
+            2px 2px 4px rgba(0, 0, 0, .1);
+        }
+
+        .neumorphic-header button:active {
+            box-shadow: inset -2px -2px 6px rgba(255, 255, 255, .7),
+            inset -2px -2px 4px rgba(255, 255, 255, .5),
+            inset 2px 2px 2px rgba(255, 255, 255, .075),
+            inset 2px 2px 4px rgba(0, 0, 0, .15);
+        }
+
         .container {
             width: 80%;
             margin: auto;
@@ -96,8 +139,20 @@
     </style>
 </head>
 <body>
+<div class="neumorphic-header">
+    <div>
+        <button>Accueil</button>
+        <button>Mon Compte</button>
+    </div>
+    <h1>Marketplace</h1>
+    <div>
+        <button>Contact</button>
+        <button>Connexion</button>
+    </div>
+</div>
 
 <div class="container">
+
     <%
         // Définir les informations de connexion à la base de données
         String url = "jdbc:mysql://localhost:3306/ecommerce";
