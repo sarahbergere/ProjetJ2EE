@@ -73,7 +73,6 @@ public class CompteBancaireDAO {
             entityManager.close();
         }
     }
-
     public void delete(CompteBancaire compteBancaire) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
