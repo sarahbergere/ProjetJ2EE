@@ -22,6 +22,15 @@ public class CompteBancaire {
     @JoinColumn(name = "ClientID")
     private Client client;
 
+    public CompteBancaire(){
+
+    }
+    public CompteBancaire(String titulaire, String numeroCompte, double v) {
+        this.titulaireDuCompte = titulaire;
+        this.numeroDeCompte = numeroCompte;
+        this.solde = v;
+    }
+
     public int getId() {
         return id;
     }

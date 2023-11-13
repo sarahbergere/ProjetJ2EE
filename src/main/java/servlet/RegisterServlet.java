@@ -49,12 +49,7 @@ public class RegisterServlet extends HttpServlet {
             int idUtilisateur = utilisateurDAO.create(utilisateur);
 
             if (idUtilisateur != 0) {
-                Client nouveauClient = new Client();
-                nouveauClient.setNom(nom);
-                nouveauClient.setPrenom(prenom);
-                nouveauClient.setAdresse(adresse);
-                nouveauClient.setEmail(email);
-                nouveauClient.setNumeroTelephone(telephone);
+                Client nouveauClient = new Client(nom, prenom, adresse,email,telephone);
                 nouveauClient.setIdUtilisateur(idUtilisateur);
 
                 clientDAO.create(nouveauClient);

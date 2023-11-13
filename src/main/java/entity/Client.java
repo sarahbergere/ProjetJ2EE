@@ -1,6 +1,10 @@
 package entity;
 
+import dao.CommandeDAO;
+import dao.CompteBancaireDAO;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,10 +35,24 @@ public class Client {
     private int idUtilisateur;
 
     @OneToMany(mappedBy = "client")
-    private List<CompteBancaire> comptesBancaires;
+    private List<CompteBancaire> comptes;
 
     @OneToMany(mappedBy = "client")
     private List<Commande> commandes;
+
+    public Client(){    }
+
+    public Client(String nom, String prenom, String adresse,String email, String numeroTelephone) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adresse;
+        this.adresseEmail = email;
+        this.numeroTelephone = numeroTelephone;
+        this.commandes = new ArrayList<>();
+
+        this.chargerCommande();
+        this.chargerCompteBancaire();
+    }
 
     public int getId() {
         return id;
@@ -93,18 +111,30 @@ public class Client {
     }
 
     public List<CompteBancaire> getComptesBancaires() {
-        return comptesBancaires;
+        return comptes;
     }
 
+    public void chargerCompteBancaire(){
+        CompteBancaireDAO compteBancaireDAO = new CompteBancaireDAO();
+        this.comptes = compteBancaireDAO.findAllByIdClient(this.getId());
+    }
+
+    public void ajouterCompteBancaire(CompteBancaire compteBancaire){this.comptes.add(compteBancaire);}
+
     public void setComptesBancaires(List<CompteBancaire> comptesBancaires) {
-        this.comptesBancaires = comptesBancaires;
+        this.comptes = comptesBancaires;
+    }
+
+    public void ajouterCommande(Commande commande) {
+        this.commandes.add(commande);
+    }
+
+    public void chargerCommande(){
+        CommandeDAO commandeDAO = new CommandeDAO();
+        this.commandes = commandeDAO.findAllById(this.getId());
     }
 
     public List<Commande> getCommandes() {
-        return commandes;
-    }
-
-    public void setCommandes(List<Commande> commandes) {
-        this.commandes = commandes;
+        return this.commandes;
     }
 }

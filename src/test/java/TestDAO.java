@@ -54,16 +54,12 @@ public class TestDAO {
 
     @Test
     public void testCreateAndUpdateCommande() {
-        Commande commande = new Commande();
-        int clientId = 2; // Remplacez par l'ID d'un client existant
+        int clientId = 2;
 
-        // Vous pouvez créer un client factice avec seulement l'ID
-        Client client = new Client();
+        Client client = new Client("gentel dehenne","matéo", "square", "mato@gmail.com", "0601234567");
         client.setId(clientId);
 
-        commande.setClient(client);
-        commande.setDateDeCommande(new Date());
-        commande.setStatutDeCommande("En cours");
+        Commande commande = new Commande(new Date(), 12.5, "En cours" , client);
 
         commandeDAO.create(commande);
 
@@ -83,17 +79,13 @@ public class TestDAO {
 
     @Test
     public void testReadCommande() {
-        Commande commande = new Commande();
-        int clientId = 2; // Remplacez par l'ID d'un client existant
+        int clientId = 2;
 
         // Vous pouvez créer un client factice avec seulement l'ID
-        Client client = new Client();
+        Client client = new Client("gentel dehenne","matéo", "square", "mato@gmail.com", "0601234567");
         client.setId(clientId);
-        client.setEmail("ndeugouema@cy-tech.fr");
-        client.setNumeroTelephone("0612345678");
-        client.setNom("Ndeugoue");
-        client.setPrenom("Marcus");
-        client.setAdresse("avenue de lhautil");
+
+        Commande commande = new Commande(new Date(), 12.5, "En cours" , client);
 
         commande.setClient(client);
         commande.setDateDeCommande(new Date());

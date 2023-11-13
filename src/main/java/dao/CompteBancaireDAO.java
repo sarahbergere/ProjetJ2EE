@@ -2,10 +2,7 @@ package dao;
 
 import entity.CompteBancaire;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.List;
 
 public class CompteBancaireDAO {
@@ -44,6 +41,21 @@ public class CompteBancaireDAO {
         return comptesBancaires;
     }
 
+    public List<CompteBancaire> findAllByIdClient(int idclient) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        Query query = entityManager.createQuery("SELECT c FROM CompteBancaire c WHERE ClientID = :idclient", CompteBancaire.class);
+        query.setParameter("idclient", idclient);
+
+        try {
+            List<CompteBancaire> compteBancaires = query.getResultList();
+            entityManager.close();
+            return compteBancaires;
+        } catch (Exception e) {
+            entityManager.close();
+            return null;
+        }
+    }
+
     public void update(CompteBancaire compteBancaire) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
@@ -80,4 +92,3 @@ public class CompteBancaireDAO {
         }
     }
 }
-

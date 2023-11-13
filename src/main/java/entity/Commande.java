@@ -11,8 +11,8 @@ public class Commande {
     @Column(name = "idcommande")
     private int id;
     @ManyToOne
-    @JoinColumn(name = "IdClient")  // Nom de la colonne pour l'ID du client
-    private Client client;  // L'ID du client associé à la commande
+    @JoinColumn(name = "IdClient")
+    private Client client;
 
     @Column(name = "DateDeCommande")
     private Date dateDeCommande;
@@ -20,6 +20,19 @@ public class Commande {
     @Column(name = "StatutDeCommande")
     private String statutDeCommande;
 
+    @Column(name = "montant")
+    private double montant;
+
+    public Commande() {
+    }
+
+    public Commande(Date date, double montant, String statut, Client client) {
+        this.dateDeCommande = date;
+        this.montant = montant;
+        this.client = client;
+
+        client.ajouterCommande(this);
+    }
     public int getId() {
         return id;
     }
@@ -50,6 +63,14 @@ public class Commande {
 
     public void setStatutDeCommande(String statutDeCommande) {
         this.statutDeCommande = statutDeCommande;
+    }
+
+    public double getMontant() {
+        return montant;
+    }
+
+    public void setMontant(double montant) {
+        this.montant = montant;
     }
 }
 

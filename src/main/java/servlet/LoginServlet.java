@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -24,8 +25,11 @@ public class LoginServlet extends HttpServlet {
         Client client = clientDAO.findByUsername(login);
 
         if (client != null && clientDAO.getPasswordById(client.getIdUtilisateur()).equals(password)) {
-            // Utilisateur client, redirigez-le vers la page du client
-            request.getRequestDispatcher("/client.jsp").forward(request, response);
+            HttpSession session = request.getSession(true);
+            session.setAttribute("pseudo", login);
+            session.setAttribute("client", client);
+            session.setAttribute("role", "client");
+            response.sendRedirect(request.getContextPath() + "/ClientServlet");
             return;
         }
 

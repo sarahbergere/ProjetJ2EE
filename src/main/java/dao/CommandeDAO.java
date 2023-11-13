@@ -2,10 +2,8 @@ package dao;
 
 import entity.Commande;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommandeDAO {
@@ -42,6 +40,21 @@ public class CommandeDAO {
                 .getResultList();
         entityManager.close();
         return commandes;
+    }
+
+    public List<Commande> findAllById(int idclient) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        Query query = entityManager.createQuery("SELECT c FROM Commande c WHERE IdClient = :idclient", Commande.class);
+        query.setParameter("idclient", idclient);
+
+        try {
+            List<Commande> commandes = query.getResultList();
+            entityManager.close();
+            return commandes;
+        } catch (Exception e) {
+            entityManager.close();
+            return null;
+        }
     }
 
     public void update(Commande commande) {
