@@ -14,7 +14,7 @@ public class CompteBancaireDAO {
 
         try {
             transaction.begin();
-            entityManager.persist(compteBancaire);
+            entityManager.merge(compteBancaire);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null && transaction.isActive()) {

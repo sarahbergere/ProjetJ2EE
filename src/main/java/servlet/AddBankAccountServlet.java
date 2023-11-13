@@ -12,22 +12,26 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "/AddBankAccountServlet")
+@WebServlet("/AddBankAccountServlet")
 public class AddBankAccountServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String titulaire = request.getParameter("titulaire");
         String numeroCompte = request.getParameter("numeroCompte");
         double solde = Double.parseDouble(request.getParameter("solde"));
+        Client client = (Client) request.getSession().getAttribute("client");
 
-        CompteBancaire compteBancaire = new CompteBancaire(titulaire, numeroCompte, solde);
+        CompteBancaire compteBancaire = new CompteBancaire(titulaire, numeroCompte, solde, client);
 
         CompteBancaireDAO compteBancaireDAO = new CompteBancaireDAO();
         compteBancaireDAO.create(compteBancaire);
 
-        Client client = (Client) request.getSession().getAttribute("client");
+
         client.ajouterCompteBancaire(compteBancaire);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("ClientServlet");
-        dispatcher.forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/ClientServlet");
+
+    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }

@@ -80,7 +80,7 @@
         </c:otherwise>
     </c:choose>
 
-    <form action="AddBankAccountServlet" method="post">
+    <form method="post" action="AddBankAccountServlet">
         <h2>Ajouter un compte bancaire</h2>
         <label for="titulaire">Nom du titulaire :</label>
         <input type="text" id="titulaire" name="titulaire" required><br>
@@ -100,7 +100,7 @@
         <h2>Comptes liés :</h2>
         <ul>
             <c:forEach var="compte" items="${sessionScope.comptes}">
-                <li>${compte.titulaireDuCompte} - ${compte.numeroDeCompte} - ${compte.solde}</li>
+                <li>${compte.titulaireDuCompte} - ${compte.numeroDeCompte} - ${compte.solde} €</li>
             </c:forEach>
         </ul>
         </c:otherwise>

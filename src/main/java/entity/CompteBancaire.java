@@ -25,10 +25,11 @@ public class CompteBancaire {
     public CompteBancaire(){
 
     }
-    public CompteBancaire(String titulaire, String numeroCompte, double v) {
+    public CompteBancaire(String titulaire, String numeroCompte, double v, Client client) {
         this.titulaireDuCompte = titulaire;
         this.numeroDeCompte = numeroCompte;
         this.solde = v;
+        this.client = client;
     }
 
     public int getId() {
