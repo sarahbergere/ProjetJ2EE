@@ -1,7 +1,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head> 
+<head>
     <title>Marketplace</title>
     <style>
         body {
