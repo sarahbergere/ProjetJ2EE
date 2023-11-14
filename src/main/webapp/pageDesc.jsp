@@ -2,24 +2,29 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Marketplace</title>
+    <title>Détails du Produit</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background: linear-gradient(to bottom right, #FFD2E5, #AAD8FF); /* Utilisez les couleurs pastel de votre choix */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
 
         .neumorphic-header {
-            background-color: #f0f0f0; /* Couleur de fond */
-            border-radius: 15px; /* Rayon des bords */
-            box-shadow: 5px 5px 10px #bcbcbc, -5px -5px 10px #ffffff; /* Ombre neumorphique */
-            padding: 15px; /* Espacement intérieur */
-            margin-bottom: 20px; /* Marge inférieure */
-            display: flex; /* Utilisation de flexbox pour aligner les éléments horizontalement */
-            justify-content: space-between; /* Alignement des éléments sur l'espace disponible */
-            align-items: center; /* Alignement vertical au centre */
+            background-color: #f0f0f0;
+            border-radius: 15px;
+            box-shadow: 5px 5px 10px #bcbcbc, -5px -5px 10px #ffffff;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 80%; /* Ajustez la largeur du header en fonction de vos besoins */
         }
 
         .neumorphic-header button {
@@ -88,7 +93,7 @@
             transform: scale(1.05); /* Applique un effet de zoom au survol */
         }
 
-        .card button {
+        .product-info button {
             padding: 0.5em 1.5em;
             background: #efefef;
             border: none;
@@ -106,14 +111,14 @@
             6px 6px 10px rgba(0, 0, 0, .15);
         }
 
-        .card button:hover {
+        .product-info button:hover {
             box-shadow: -2px -2px 6px rgba(255, 255, 255, .6),
             -2px -2px 4px rgba(255, 255, 255, .4),
             2px 2px 2px rgba(255, 255, 255, .05),
             2px 2px 4px rgba(0, 0, 0, .1);
         }
 
-        .card button:active {
+        .product-info button:active {
             box-shadow: inset -2px -2px 6px rgba(255, 255, 255, .7),
             inset -2px -2px 4px rgba(255, 255, 255, .5),
             inset 2px 2px 2px rgba(255, 255, 255, .075),
@@ -136,87 +141,109 @@
             font-size: 0.8rem; /* Réduire la taille du texte pour le stock */
             color: #444444;
         }
-    </style>
-    <script>
-        function redirectToPageDesc(productName) {
-            window.location.href = "pageDesc.jsp?productName=" + encodeURIComponent(productName);
+        .product-details {
+            display: flex;
+            align-items: center;
+            max-width: 800px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.5);
         }
-    </script>
+
+        .product-image {
+            margin-right: 20px;
+        }
+        .product-image img {
+            width: 400px;
+        }
+
+        .product-info {
+            max-width: 400px;
+            
+        }
+
+        .product-info p {
+            margin: 0;
+        }
+
+        .product-info p {
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
-<div class="neumorphic-header">
-    <div>
-        <button>Accueil</button>
-        <button>Mon Compte</button>
-    </div>
-    <h1>Marketplace</h1>
-    <div>
-        <button>Contact</button>
-        <button>Connexion</button>
-    </div>
-</div>
 
-<div class="container">
+<%
+    // Récupérer le nom du produit depuis le paramètre de l'URL
+    String productName = request.getParameter("productName");
 
-    <%
-        // Définir les informations de connexion à la base de données
-        String url = "jdbc:mysql://localhost:3306/ecommerce";
-        String username = "root";
-        String password = "cytech0001";
+    // Définir les informations de connexion à la base de données
+    String url = "jdbc:mysql://localhost:3306/ecommerce";
+    String username = "root";
+    String password = "cytech0001";
 
+    try {
         // Charger le pilote JDBC
         Class.forName("com.mysql.cj.jdbc.Driver");
 
         // Établir la connexion à la base de données
         Connection connection = DriverManager.getConnection(url, username, password);
 
-        // Créer la requête SQL
-        String sqlQuery = "SELECT * FROM Produit";
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(sqlQuery);
-    %>
+        // Créer la requête SQL pour récupérer les informations du produit
+        String sqlQuery = "SELECT * FROM Produit WHERE Nom=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+        preparedStatement.setString(1, productName);
 
-    <h2>Produits disponibles :</h2>
+        // Exécuter la requête
+        ResultSet resultSet = preparedStatement.executeQuery();
 
-    <%
-        while (resultSet.next()) {
-            String nom = resultSet.getString("Nom");
-            double prix = resultSet.getDouble("Prix");
-            int stock = resultSet.getInt("Stock");
+        // Afficher les informations du produit
+        if (resultSet.next()) {
             String imageUrl = resultSet.getString("Image");
-    %>
+            double prix = resultSet.getDouble("Prix");
+            String description = resultSet.getString("Description");
+            int stock = resultSet.getInt("Stock");
 
-    <div class="card">
-        <h3><%= nom %></h3>
-        <img src="<%= imageUrl %>" alt="<%= nom %> Image">
-        <p><b><%= prix %> €</b></p>
-        <p class="stock"><i>Il en reste <%= stock %> !</i></p>
-        <button type="button" onclick="redirectToPageDesc('<%= nom %>')">Acheter</button>
+%>
+
+<div class="product-details">
+    <div class="product-image">
+        <img src="<%= imageUrl %>" alt="<%= productName %> Image" width="150">
     </div>
-
-    <%
+    <div class="product-info">
+        <h2>Détails du Produit</h2>
+        <p><strong>Nom :</strong> <%= productName %></p>
+        <p><strong>Prix :</strong> <%= prix %> €</p>
+        <p><strong>Description :</strong> <%= description %></p>
+        <p><strong>Stock :</strong> <%= stock %></p>
+        <br>
+        <br>
+        <br>
+        <button type="button">Acheter</button>
+    </div>
+</div>
+<%
+} else {
+%>
+<div>
+    <h2>Produit non trouvé</h2>
+    <p>Le produit sélectionné n'a pas été trouvé dans la base de données.</p>
+</div>
+<%
         }
+
         // Fermer les ressources
         resultSet.close();
-        statement.close();
+        preparedStatement.close();
         connection.close();
-    %>
 
-
-</div>
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+%>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
 
