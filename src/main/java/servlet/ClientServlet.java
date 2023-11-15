@@ -21,20 +21,10 @@ public class ClientServlet extends HttpServlet {
         if (session != null && session.getAttribute("role") != null) {
             String pseudo = (String) session.getAttribute("pseudo");
             Client client = (Client) session.getAttribute("client");
-            if (client != null) {
-                List<CompteBancaire> comptes = client.getComptesBancaires();
+            client.chargerCompteBancaire();
 
-                if (comptes != null) {
-                    session.setAttribute("comptes", comptes);
-                    request.getRequestDispatcher("/client.jsp").forward(request, response);
-                    return;
-                }
-            }
-
-            // Handle unexpected null values or errors
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error retrieving client data.");
+            request.getRequestDispatcher("/client.jsp").forward(request, response);
         } else {
-            // cas où la session n'est pas disponible (non connecté)
             response.sendRedirect(request.getContextPath() + "/LoginServlet");
         }
     }

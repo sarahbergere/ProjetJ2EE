@@ -110,7 +110,7 @@ public class Client {
         this.idUtilisateur = idUtilisateur;
     }
 
-    public List<CompteBancaire> getComptesBancaires() {
+    public List<CompteBancaire> getComptes() {
         return comptes;
     }
 
@@ -121,7 +121,7 @@ public class Client {
 
     public void ajouterCompteBancaire(CompteBancaire compteBancaire){this.comptes.add(compteBancaire);}
 
-    public void setComptesBancaires(List<CompteBancaire> comptesBancaires) {
+    public void setComptes(List<CompteBancaire> comptesBancaires) {
         this.comptes = comptesBancaires;
     }
 

@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `ecommerce` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `ecommerce`;
 -- MySQL dump 10.13  Distrib 8.0.35, for Win64 (x86_64)
 --
 -- Host: localhost    Database: ecommerce
@@ -23,15 +25,15 @@ DROP TABLE IF EXISTS `admin`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `admin` (
-  `idAdmin` int NOT NULL,
-  `Nom` varchar(50) NOT NULL,
-  `Prenom` varchar(50) NOT NULL,
-  `Email` varchar(100) NOT NULL,
-  `NumeroTelephone` varchar(20) NOT NULL,
-  `idUtilisateur` int NOT NULL,
-  PRIMARY KEY (`idAdmin`),
-  KEY `admin_utilisateur_id_fk` (`idUtilisateur`),
-  CONSTRAINT `admin_utilisateur_id_fk` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`id`)
+                         `idAdmin` int NOT NULL,
+                         `Nom` varchar(50) NOT NULL,
+                         `Prenom` varchar(50) NOT NULL,
+                         `Email` varchar(100) NOT NULL,
+                         `NumeroTelephone` varchar(20) NOT NULL,
+                         `idUtilisateur` int NOT NULL,
+                         PRIMARY KEY (`idAdmin`),
+                         KEY `admin_utilisateur_id_fk` (`idUtilisateur`),
+                         CONSTRAINT `admin_utilisateur_id_fk` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -53,16 +55,16 @@ DROP TABLE IF EXISTS `client`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `client` (
-  `idclient` int NOT NULL AUTO_INCREMENT,
-  `Nom` varchar(50) NOT NULL,
-  `Prenom` varchar(50) NOT NULL,
-  `Adresse` varchar(100) NOT NULL,
-  `Email` varchar(100) NOT NULL,
-  `Telephone` varchar(20) NOT NULL,
-  `idUtilisateur` int NOT NULL,
-  PRIMARY KEY (`idclient`),
-  KEY `client_utilisateur_id_fk` (`idUtilisateur`),
-  CONSTRAINT `client_utilisateur_id_fk` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`id`)
+                          `idclient` int NOT NULL AUTO_INCREMENT,
+                          `Nom` varchar(50) NOT NULL,
+                          `Prenom` varchar(50) NOT NULL,
+                          `Adresse` varchar(100) NOT NULL,
+                          `Email` varchar(100) NOT NULL,
+                          `Telephone` varchar(20) NOT NULL,
+                          `idUtilisateur` int NOT NULL,
+                          PRIMARY KEY (`idclient`),
+                          KEY `client_utilisateur_id_fk` (`idUtilisateur`),
+                          CONSTRAINT `client_utilisateur_id_fk` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -84,13 +86,13 @@ DROP TABLE IF EXISTS `commande`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `commande` (
-  `idcommande` int NOT NULL AUTO_INCREMENT,
-  `IdClient` int NOT NULL,
-  `DateDeCommande` date NOT NULL,
-  `StatutDeCommande` varchar(20) NOT NULL,
-  PRIMARY KEY (`idcommande`),
-  KEY `IdClient_idx` (`IdClient`),
-  CONSTRAINT `commande_client_idclient_fk` FOREIGN KEY (`IdClient`) REFERENCES `client` (`idclient`)
+                            `idcommande` int NOT NULL AUTO_INCREMENT,
+                            `IdClient` int NOT NULL,
+                            `DateDeCommande` date NOT NULL,
+                            `StatutDeCommande` varchar(20) NOT NULL,
+                            PRIMARY KEY (`idcommande`),
+                            KEY `IdClient_idx` (`IdClient`),
+                            CONSTRAINT `commande_client_idclient_fk` FOREIGN KEY (`IdClient`) REFERENCES `client` (`idclient`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -111,14 +113,14 @@ DROP TABLE IF EXISTS `comptebancaire`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `comptebancaire` (
-  `idcompteBancaire` int NOT NULL AUTO_INCREMENT,
-  `TitulaireDuCompte` varchar(100) NOT NULL,
-  `NumeroDeCompte` varchar(20) NOT NULL,
-  `Solde` decimal(10,2) NOT NULL,
-  `ClientID` int NOT NULL,
-  PRIMARY KEY (`idcompteBancaire`),
-  KEY `comptebancaire_client_idclient_fk` (`ClientID`),
-  CONSTRAINT `comptebancaire_client_idclient_fk` FOREIGN KEY (`ClientID`) REFERENCES `client` (`idclient`)
+                                  `idcompteBancaire` int NOT NULL AUTO_INCREMENT,
+                                  `TitulaireDuCompte` varchar(100) NOT NULL,
+                                  `NumeroDeCompte` varchar(20) NOT NULL,
+                                  `Solde` decimal(10,2) NOT NULL,
+                                  `ClientID` int NOT NULL,
+                                  PRIMARY KEY (`idcompteBancaire`),
+                                  KEY `comptebancaire_client_idclient_fk` (`ClientID`),
+                                  CONSTRAINT `comptebancaire_client_idclient_fk` FOREIGN KEY (`ClientID`) REFERENCES `client` (`idclient`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -128,6 +130,7 @@ CREATE TABLE `comptebancaire` (
 
 LOCK TABLES `comptebancaire` WRITE;
 /*!40000 ALTER TABLE `comptebancaire` DISABLE KEYS */;
+INSERT INTO `comptebancaire` VALUES (1,'Gentel-Dehenne Matéo','584 586 785 214',574.85,5);
 /*!40000 ALTER TABLE `comptebancaire` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,15 +142,15 @@ DROP TABLE IF EXISTS `detailcommande`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `detailcommande` (
-  `idDetailCommande` int NOT NULL AUTO_INCREMENT,
-  `CommandeId` int NOT NULL,
-  `ProduitId` int NOT NULL,
-  `Quantite` int NOT NULL,
-  PRIMARY KEY (`idDetailCommande`),
-  KEY `CommandeID_idx` (`CommandeId`),
-  KEY `ProduitID_idx` (`ProduitId`),
-  CONSTRAINT `CommandeID` FOREIGN KEY (`CommandeId`) REFERENCES `commande` (`idcommande`),
-  CONSTRAINT `ProduitID` FOREIGN KEY (`ProduitId`) REFERENCES `produit` (`idproduit`)
+                                  `idDetailCommande` int NOT NULL AUTO_INCREMENT,
+                                  `CommandeId` int NOT NULL,
+                                  `ProduitId` int NOT NULL,
+                                  `Quantite` int NOT NULL,
+                                  PRIMARY KEY (`idDetailCommande`),
+                                  KEY `CommandeID_idx` (`CommandeId`),
+                                  KEY `ProduitID_idx` (`ProduitId`),
+                                  CONSTRAINT `CommandeID` FOREIGN KEY (`CommandeId`) REFERENCES `commande` (`idcommande`),
+                                  CONSTRAINT `ProduitID` FOREIGN KEY (`ProduitId`) REFERENCES `produit` (`idproduit`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -168,16 +171,16 @@ DROP TABLE IF EXISTS `paiement`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `paiement` (
-  `idPaiement` int NOT NULL AUTO_INCREMENT,
-  `CommandeID` int NOT NULL,
-  `CompteBancaireID` int NOT NULL,
-  `Montant` decimal(10,2) NOT NULL,
-  `Date` date NOT NULL,
-  PRIMARY KEY (`idPaiement`),
-  KEY `CommandeID_paiement_idx` (`CommandeID`),
-  KEY `CompteBancaireID_idx` (`CompteBancaireID`),
-  CONSTRAINT `CommandeID_paiement` FOREIGN KEY (`CommandeID`) REFERENCES `commande` (`idcommande`),
-  CONSTRAINT `CompteBancaireID` FOREIGN KEY (`CompteBancaireID`) REFERENCES `comptebancaire` (`idcompteBancaire`)
+                            `idPaiement` int NOT NULL AUTO_INCREMENT,
+                            `CommandeID` int NOT NULL,
+                            `CompteBancaireID` int NOT NULL,
+                            `Montant` decimal(10,2) NOT NULL,
+                            `Date` date NOT NULL,
+                            PRIMARY KEY (`idPaiement`),
+                            KEY `CommandeID_paiement_idx` (`CommandeID`),
+                            KEY `CompteBancaireID_idx` (`CompteBancaireID`),
+                            CONSTRAINT `CommandeID_paiement` FOREIGN KEY (`CommandeID`) REFERENCES `commande` (`idcommande`),
+                            CONSTRAINT `CompteBancaireID` FOREIGN KEY (`CompteBancaireID`) REFERENCES `comptebancaire` (`idcompteBancaire`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -198,13 +201,13 @@ DROP TABLE IF EXISTS `produit`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `produit` (
-  `idproduit` int NOT NULL AUTO_INCREMENT,
-  `Nom` varchar(100) NOT NULL,
-  `Description` mediumtext,
-  `Prix` decimal(10,2) NOT NULL,
-  `Stock` int NOT NULL,
-  `Image` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`idproduit`)
+                           `idproduit` int NOT NULL AUTO_INCREMENT,
+                           `Nom` varchar(100) NOT NULL,
+                           `Description` mediumtext,
+                           `Prix` decimal(10,2) NOT NULL,
+                           `Stock` int NOT NULL,
+                           `Image` varchar(500) DEFAULT NULL,
+                           PRIMARY KEY (`idproduit`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

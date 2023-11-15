@@ -73,14 +73,27 @@ public class CompteBancaireDAO {
             entityManager.close();
         }
     }
-    public void delete(CompteBancaire compteBancaire) {
+    public void delete(String id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
 
         try {
             transaction.begin();
-            entityManager.remove(compteBancaire);
-            transaction.commit();
+
+            CompteBancaire compteBancaire = entityManager.find(CompteBancaire.class, Integer.parseInt(id));
+            if( compteBancaire != null){
+                entityManager.remove(compteBancaire);
+                if (entityManager.contains(compteBancaire)) {
+                    entityManager.refresh(compteBancaire);
+                }
+                if (transaction.isActive()) {
+                    transaction.commit();
+                }
+            } else {
+                if (transaction.isActive()) {
+                    transaction.rollback();
+                }
+            }
         } catch (Exception e) {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();

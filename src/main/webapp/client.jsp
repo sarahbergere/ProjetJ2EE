@@ -93,19 +93,23 @@
 
 
     <c:choose>
-        <c:when test="${empty sessionScope.comptes}">
+        <c:when test="${empty sessionScope.client.comptes}">
             <p>Vous n'avez pas encore de compte bancaire lié à votre compte</p>
         </c:when>
         <c:otherwise>
         <h2>Comptes liés :</h2>
         <ul>
-            <c:forEach var="compte" items="${sessionScope.comptes}">
+            <c:forEach var="compte" items="${sessionScope.client.comptes}">
                 <li>${compte.titulaireDuCompte} - ${compte.numeroDeCompte} - ${compte.solde} €</li>
+                <form action="DeleteBankAccountServlet" method="post" style="display:inline;">
+                    <input type="hidden" name="compteId" value="${compte.id}">
+                    <input type="hidden" name="nomcompte" value="${compte.titulaireDuCompte}">
+                    <input type="submit" value="Supprimer le compte">
+                </form>
             </c:forEach>
         </ul>
         </c:otherwise>
     </c:choose>
-
 
     <form action="LogoutServlet" method="post">
         <input type="submit" value="Déconnexion">
