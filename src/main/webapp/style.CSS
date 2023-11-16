@@ -1,0 +1,245 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0;
+    background: linear-gradient(to bottom right, #FFD2E5, #AAD8FF); /* Utilisez les couleurs pastel de votre choix */
+}
+
+.neumorphic-header {
+    background-color: #f0f0f0; /* Couleur de fond */
+    border-radius: 15px; /* Rayon des bords */
+    box-shadow: 5px 5px 10px #bcbcbc, -5px -5px 10px #ffffff; /* Ombre neumorphique */
+    padding: 15px; /* Espacement intérieur */
+    margin-bottom: 20px; /* Marge inférieure */
+    display: flex; /* Utilisation de flexbox pour aligner les éléments horizontalement */
+    justify-content: space-between; /* Alignement des éléments sur l'espace disponible */
+    align-items: center; /* Alignement vertical au centre */
+}
+
+.neumorphic-header button {
+    padding: 0.5em 1.5em;
+    background: #efefef;
+    border: none;
+    border-radius: .5rem;
+    color: #444;
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+    box-shadow: -6px -6px 14px rgba(255, 255, 255, .7),
+    -6px -6px 10px rgba(255, 255, 255, .5),
+    6px 6px 8px rgba(255, 255, 255, .075),
+    6px 6px 10px rgba(0, 0, 0, .15);
+}
+
+.neumorphic-header button:hover {
+    box-shadow: -2px -2px 6px rgba(255, 255, 255, .6),
+    -2px -2px 4px rgba(255, 255, 255, .4),
+    2px 2px 2px rgba(255, 255, 255, .05),
+    2px 2px 4px rgba(0, 0, 0, .1);
+}
+
+.neumorphic-header button:active {
+    box-shadow: inset -2px -2px 6px rgba(255, 255, 255, .7),
+    inset -2px -2px 4px rgba(255, 255, 255, .5),
+    inset 2px 2px 2px rgba(255, 255, 255, .075),
+    inset 2px 2px 4px rgba(0, 0, 0, .15);
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    overflow: hidden;
+    text-align: center;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Pour gérer le retour à la ligne des cards si l'espace est insuffisant */
+}
+
+.card {
+    /* Retirez 'float: left;' pour utiliser flexbox */
+    margin: 10px;
+}
+
+.categories {
+    margin-bottom: 20px;
+}
+
+.category {
+    display: inline-block;
+    margin-right: 10px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 10px;
+    width: 200px;
+    float: left;
+    background-color: rgba(255, 255, 255, 0.5); /* Couleur avec opacité de 50% */
+    text-align: center; /* Ajout de la propriété pour centrer le contenu */
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05); /* Applique un effet de zoom au survol */
+}
+
+.card button {
+    padding: 0.5em 1.5em;
+    background: #efefef;
+    border: none;
+    border-radius: .5rem;
+    color: #444;
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+    box-shadow: -6px -6px 14px rgba(255, 255, 255, .7),
+    -6px -6px 10px rgba(255, 255, 255, .5),
+    6px 6px 8px rgba(255, 255, 255, .075),
+    6px 6px 10px rgba(0, 0, 0, .15);
+}
+
+.card button:hover {
+    box-shadow: -2px -2px 6px rgba(255, 255, 255, .6),
+    -2px -2px 4px rgba(255, 255, 255, .4),
+    2px 2px 2px rgba(255, 255, 255, .05),
+    2px 2px 4px rgba(0, 0, 0, .1);
+}
+
+.card button:active {
+    box-shadow: inset -2px -2px 6px rgba(255, 255, 255, .7),
+    inset -2px -2px 4px rgba(255, 255, 255, .5),
+    inset 2px 2px 2px rgba(255, 255, 255, .075),
+    inset 2px 2px 4px rgba(0, 0, 0, .15);
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    width: 200px; /* Fixe la largeur à 200px */
+    height: 200px; /* Fixe la hauteur à 200px */
+}
+
+.card p {
+    margin: 10px 0;
+    font-size: 1.8rem; /* Agrandir la taille du texte */
+}
+
+.card p.stock {
+    font-size: 0.8rem; /* Réduire la taille du texte pour le stock */
+    color: #444444;
+}
+form {
+    width: 250px;
+    background: #efefef;
+    border: none;
+    box-shadow: 5px 5px 10px rgba(163, 177, 198, 0.5),
+    -5px -5px 10px rgba(255, 255, 255, 0.6);
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    margin : 0 auto;
+}
+
+label {
+    padding: 10px 5px;
+}
+
+form input[type="text"] {
+    background: #efefef;
+    padding: 10px;
+    height: 30px;
+    border: none;
+    box-shadow: inset 5px 5px 10px rgba(163, 177, 198, 0.5),
+    inset -5px -5px 12px rgba(255, 255, 255, 0.8);
+    outline: none;
+    border-radius: 10px;
+}
+form input[type="number"] {
+    background: #efefef;
+    padding: 10px;
+    height: 30px;
+    border: none;
+    box-shadow: inset 5px 5px 10px rgba(163, 177, 198, 0.5),
+    inset -5px -5px 12px rgba(255, 255, 255, 0.8);
+    outline: none;
+    border-radius: 10px;
+}
+.product-info button {
+    padding: 0.5em 1.5em;
+    background: #efefef;
+    border: none;
+    border-radius: .5rem;
+    color: #444;
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+    box-shadow: -6px -6px 14px rgba(255, 255, 255, .7),
+    -6px -6px 10px rgba(255, 255, 255, .5),
+    6px 6px 8px rgba(255, 255, 255, .075),
+    6px 6px 10px rgba(0, 0, 0, .15);
+}
+
+.product-info button:hover {
+    box-shadow: -2px -2px 6px rgba(255, 255, 255, .6),
+    -2px -2px 4px rgba(255, 255, 255, .4),
+    2px 2px 2px rgba(255, 255, 255, .05),
+    2px 2px 4px rgba(0, 0, 0, .1);
+}
+
+.product-info button:active {
+    box-shadow: inset -2px -2px 6px rgba(255, 255, 255, .7),
+    inset -2px -2px 4px rgba(255, 255, 255, .5),
+    inset 2px 2px 2px rgba(255, 255, 255, .075),
+    inset 2px 2px 4px rgba(0, 0, 0, .15);
+}
+.product-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 800px;
+    padding: 20px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.product-image {
+    margin-right: 20px;
+}
+.product-image img {
+    width: 400px;
+}
+
+.product-info {
+    max-width: 400px;
+
+}
+
+.product-info p {
+    margin: 0;
+}
+
+.product-info p {
+    margin: 0;
+}
