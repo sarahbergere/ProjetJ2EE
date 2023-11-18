@@ -12,6 +12,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+
+import entity.Password;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -24,13 +27,19 @@ public class LoginServlet extends HttpServlet {
         ClientDAO clientDAO = new ClientDAO();
         Client client = clientDAO.findByUsername(login);
 
-        if (client != null && clientDAO.getPasswordById(client.getIdUtilisateur()).equals(password)) {
-            HttpSession session = request.getSession(true);
-            session.setAttribute("pseudo", login);
-            session.setAttribute("client", client);
-            session.setAttribute("role", "client");
-            response.sendRedirect(request.getContextPath() + "/ClientServlet");
-            return;
+        try{
+            if (client != null && clientDAO.getPasswordById(client.getIdUtilisateur()).equals(Password.hashPassword(password))) {
+                HttpSession session = request.getSession(true);
+                session.setAttribute("pseudo", login);
+                session.setAttribute("client", client);
+                session.setAttribute("role", "client");
+                response.sendRedirect(request.getContextPath() + "/ClientServlet");
+                return;
+            }
+
+        } catch (
+                NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
 
         // Si ce n'est pas un client, vérifiez si c'est un administrateur
