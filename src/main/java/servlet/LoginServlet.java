@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
-import entity.Password;
+import Password;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {

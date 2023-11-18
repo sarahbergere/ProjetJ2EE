@@ -21,7 +21,7 @@ import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
-import entity.Password;
+import Password;
 
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
