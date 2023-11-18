@@ -5,8 +5,8 @@
     <title>Marketplace</title>
     <link rel="stylesheet" type="text/css" href="style.CSS">
     <script>
-        function redirectToPageDesc(productName) {
-            window.location.href = "pageDesc.jsp?productName=" + encodeURIComponent(productName);
+        function redirectToPageDesc(idproduct) {
+            window.location.href = "pageDesc.jsp?idproduct=" + encodeURIComponent(idproduct);
         }
     </script>
 </head>
@@ -37,6 +37,7 @@
 
     <%
         while (resultSet.next()) {
+            int id = resultSet.getInt("idproduit");
             String nom = resultSet.getString("Nom");
             double prix = resultSet.getDouble("Prix");
             int stock = resultSet.getInt("Stock");
@@ -48,7 +49,7 @@
         <img src="<%= imageUrl %>" alt="<%= nom %> Image">
         <p><b><%= prix %> €</b></p>
         <p class="stock"><i>Il en reste <%= stock %> !</i></p>
-        <button type="button" onclick="redirectToPageDesc('<%= nom %>')">Acheter</button>
+        <button type="button" onclick="redirectToPageDesc('<%= id %>')">Acheter</button>
     </div>
 
     <%
@@ -64,16 +65,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-

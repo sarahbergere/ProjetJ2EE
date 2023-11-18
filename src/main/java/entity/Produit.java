@@ -10,7 +10,7 @@ public class Produit {
     private int id;
 
     @Column(name = "Nom")
-    private String nomDuProduit;
+    private String nom;
 
     @Column(name = "Description")
     private String description;
@@ -21,6 +21,9 @@ public class Produit {
     @Column(name = "Stock")
     private int stock;
 
+    @Column(name = "Image")
+    private String image;
+
     public int getId() {
         return id;
     }
@@ -29,12 +32,12 @@ public class Produit {
         this.id = id;
     }
 
-    public String getNomDuProduit() {
-        return nomDuProduit;
+    public String getNom() {
+        return nom;
     }
 
-    public void setNomDuProduit(String nomDuProduit) {
-        this.nomDuProduit = nomDuProduit;
+    public void setNom(String nomDuProduit) {
+        this.nom = nomDuProduit;
     }
 
     public String getDescription() {
@@ -59,5 +62,13 @@ public class Produit {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

@@ -115,12 +115,8 @@
 <header>
     <h1 id="site">Notre site</h1>
     <nav>
-        <a href="#"><img class="icon" src="img/basket.png" alt="cart icon"></a>
-        <form action="LogoutServlet" method="post" class="logout-form">
-            <button type="submit" id="logout-button" aria-label="Déconnexion">
-                <img class="icon" src="img/logout.png" alt="logout icon">
-            </button>
-        </form>
+        <a href="panier.jsp"><img class="icon" src="img/basket.png" alt="cart icon"></a>
+        <a href="LogoutServlet"><img class="icon" src="img/logout.png" alt="logout icon"></a>
     </nav>
 </header>
 <div class="content">

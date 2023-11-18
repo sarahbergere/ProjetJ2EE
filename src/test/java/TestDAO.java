@@ -35,7 +35,7 @@ public class TestDAO {
     @Test
     public void testCreateAndDeleteProduit() {
         Produit produit = new Produit();
-        produit.setNomDuProduit("Nom du produit");
+        produit.setNom("Nom du produit");
         produit.setDescription("Description du produit");
         produit.setPrix(19.99);
         produit.setStock(50);
@@ -45,7 +45,7 @@ public class TestDAO {
         Assertions.assertNotNull(produit.getId());
 
         Produit retrievedProduit = produitDAO.findById(produit.getId());
-        Assertions.assertEquals("Nom du produit", retrievedProduit.getNomDuProduit());
+        Assertions.assertEquals("Nom du produit", retrievedProduit.getNom());
 
         produitDAO.delete(produit);
 
