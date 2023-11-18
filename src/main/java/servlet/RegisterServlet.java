@@ -14,11 +14,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
+
+import Functions.Password;
+
 
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
@@ -43,7 +47,13 @@ public class RegisterServlet extends HttpServlet {
 
             Utilisateur utilisateur = new Utilisateur();
             utilisateur.setPseudo(pseudo);
-            utilisateur.setMotDePasse(password);
+            try {
+                utilisateur.setMotDePasse(Password.hashPassword(password));
+                System.out.println(password);
+                System.out.println(Password.hashPassword(password));
+            } catch (NoSuchAlgorithmException e) {
+                throw new RuntimeException(e);
+            }
             utilisateur.setRole(Role.client);
 
             int idUtilisateur = utilisateurDAO.create(utilisateur);
