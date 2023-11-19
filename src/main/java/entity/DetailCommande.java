@@ -21,6 +21,16 @@ public class DetailCommande {
     @Column(name = "Quantite")
     private int quantite;
 
+    public DetailCommande() {
+
+    }
+
+    public DetailCommande(Commande commande, Produit produit, int quantite) {
+        this.commande = commande;
+        this.produit = produit;
+        this.quantite = quantite;
+    }
+
     public int getId() {
         return id;
     }

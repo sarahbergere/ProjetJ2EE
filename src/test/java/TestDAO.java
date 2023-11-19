@@ -4,6 +4,7 @@ import dao.ProduitDAO;
 import entity.Client;
 import entity.Commande;
 import entity.Produit;
+import entity.StatutCommande;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -59,14 +60,14 @@ public class TestDAO {
         Client client = new Client("gentel dehenne","matéo", "square", "mato@gmail.com", "0601234567");
         client.setId(clientId);
 
-        Commande commande = new Commande(new Date(), 12.5, "En cours" , client);
+        Commande commande = new Commande(new Date(), 12.5, StatutCommande.expediée.toString() , client);
 
         commandeDAO.create(commande);
 
         Assertions.assertNotNull(commande.getId());
 
         // Mise à jour de la commande
-        commande.setStatutDeCommande("Terminée");
+        commande.setStatutDeCommande(StatutCommande.livrée.toString());
         commandeDAO.update(commande);
 
         Commande updatedCommande = commandeDAO.findById(commande.getId());
@@ -85,11 +86,11 @@ public class TestDAO {
         Client client = new Client("gentel dehenne","matéo", "square", "mato@gmail.com", "0601234567");
         client.setId(clientId);
 
-        Commande commande = new Commande(new Date(), 12.5, "En cours" , client);
+        Commande commande = new Commande(new Date(), 12.5, StatutCommande.expediée.toString() , client);
 
         commande.setClient(client);
         commande.setDateDeCommande(new Date());
-        commande.setStatutDeCommande("En cours");
+        commande.setStatutDeCommande(StatutCommande.traitement.toString());
 
         commandeDAO.create(commande);
 

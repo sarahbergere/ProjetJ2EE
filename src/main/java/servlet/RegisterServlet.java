@@ -49,8 +49,6 @@ public class RegisterServlet extends HttpServlet {
             utilisateur.setPseudo(pseudo);
             try {
                 utilisateur.setMotDePasse(Password.hashPassword(password));
-                System.out.println(password);
-                System.out.println(Password.hashPassword(password));
             } catch (NoSuchAlgorithmException e) {
                 throw new RuntimeException(e);
             }

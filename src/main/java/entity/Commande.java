@@ -28,6 +28,7 @@ public class Commande {
 
     public Commande(Date date, double montant, String statut, Client client) {
         this.dateDeCommande = date;
+        this.statutDeCommande = statut;
         this.montant = montant;
         this.client = client;
 

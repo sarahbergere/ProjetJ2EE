@@ -26,7 +26,7 @@ public class CompteBancaireDAO {
         }
     }
 
-    public CompteBancaire findById(Long id) {
+    public CompteBancaire findById(int id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         CompteBancaire compteBancaire = entityManager.find(CompteBancaire.class, id);
         entityManager.close();

@@ -22,6 +22,17 @@ public class Paiement {
     @Column(name = "Montant")
     private double montantDuPaiement;
 
+    public Paiement(){
+
+    }
+
+    public Paiement(Commande commande, CompteBancaire compteBancaire, double montantDuPaiement, Date dateDuPaiement) {
+        this.commande = commande;
+        this.compteBancaire = compteBancaire;
+        this.montantDuPaiement = montantDuPaiement;
+        this.dateDuPaiement = dateDuPaiement;
+    }
+
     @Column(name = "Date")
     private Date dateDuPaiement;
 

@@ -9,14 +9,17 @@ import java.util.List;
 public class CommandeDAO {
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Persistence");
 
-    public void create(Commande commande) {
+    public int create(Commande commande) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
 
+        int generatedId = 0;
         try {
             transaction.begin();
             entityManager.persist(commande);
             transaction.commit();
+
+            generatedId = commande.getId();
         } catch (Exception e) {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
@@ -25,6 +28,7 @@ public class CommandeDAO {
         } finally {
             entityManager.close();
         }
+        return generatedId;
     }
 
     public Commande findById(int id) {
