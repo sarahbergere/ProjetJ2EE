@@ -8,7 +8,7 @@
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/ecommerce</property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">eisti0001</property>
+        <property name="hibernate.connection.password">cytech0001</property>
 
         <!-- Options de journalisation -->
         <property name="hibernate.show_sql">true</property>
