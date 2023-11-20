@@ -40,36 +40,48 @@ public class RegisterServlet extends HttpServlet {
                 pseudo.isEmpty() || nom.isEmpty() || prenom.isEmpty() || adresse.isEmpty() || email.isEmpty() || telephone.isEmpty() || password.isEmpty()) {
             message = "Veuillez remplir tous les champs du formulaire.";
         } else {
-            EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Persistence");
 
-            ClientDAO clientDAO = new ClientDAO(entityManagerFactory);
-            UtilisateurDAO utilisateurDAO = new UtilisateurDAO(entityManagerFactory);
+            ClientDAO clientdao = new ClientDAO();
 
-            Utilisateur utilisateur = new Utilisateur();
-            utilisateur.setPseudo(pseudo);
-            try {
-                utilisateur.setMotDePasse(Password.hashPassword(password));
-            } catch (NoSuchAlgorithmException e) {
-                throw new RuntimeException(e);
+            if(clientdao.findByUsername(pseudo) == null ){
+
+                EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Persistence");
+
+                ClientDAO clientDAO = new ClientDAO(entityManagerFactory);
+                UtilisateurDAO utilisateurDAO = new UtilisateurDAO(entityManagerFactory);
+
+                Utilisateur utilisateur = new Utilisateur();
+                utilisateur.setPseudo(pseudo);
+                try {
+                    utilisateur.setMotDePasse(Password.hashPassword(password));
+                } catch (NoSuchAlgorithmException e) {
+                    throw new RuntimeException(e);
+                }
+                utilisateur.setRole(Role.client);
+
+                int idUtilisateur = utilisateurDAO.create(utilisateur);
+
+                if (idUtilisateur != 0) {
+                    Client nouveauClient = new Client(nom, prenom, adresse,email,telephone);
+                    nouveauClient.setIdUtilisateur(idUtilisateur);
+
+                    clientDAO.create(nouveauClient);
+
+                    sendEmail(email, prenom);
+
+                    message = "Le compte a été créé avec succès Un e-mail de confirmation a été envoyé à " + email;
+                } else {
+                    message = "Erreur lors de la création du compte. Veuillez réessayer.";
+                }
+
+                entityManagerFactory.close();
+
             }
-            utilisateur.setRole(Role.client);
 
-            int idUtilisateur = utilisateurDAO.create(utilisateur);
-
-            if (idUtilisateur != 0) {
-                Client nouveauClient = new Client(nom, prenom, adresse,email,telephone);
-                nouveauClient.setIdUtilisateur(idUtilisateur);
-
-                clientDAO.create(nouveauClient);
-
-                sendEmail(email, prenom);
-
-                message = "Le compte a été créé avec succès Un e-mail de confirmation a été envoyé à " + email;
-            } else {
-                message = "Erreur lors de la création du compte. Veuillez réessayer.";
+            else{
+                message = "Pseudonyme déjà utilisé.";
             }
 
-            entityManagerFactory.close();
         }
         request.setAttribute("message", message);
         request.getRequestDispatcher("/inscription.jsp").forward(request, response);
