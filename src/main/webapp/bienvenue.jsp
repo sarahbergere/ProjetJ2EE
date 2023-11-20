@@ -21,7 +21,7 @@
         // Définir les informations de connexion à la base de données
         String url = "jdbc:mysql://localhost:3306/ecommerce";
         String username = "root";
-        String password = "eisti0001";
+        String password = "cytech0001";
 
         // Charger le pilote JDBC
         Class.forName("com.mysql.cj.jdbc.Driver");
