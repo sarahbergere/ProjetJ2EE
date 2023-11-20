@@ -60,9 +60,20 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        HttpSession session = request.getSession(false); // Ne crée pas de nouvelle session s'il n'y en a pas
+
+        // Vérifie si session existe et si l'utilisateur déjà connecté en tant que client
+        if (session != null && session.getAttribute("role") != null && session.getAttribute("role").equals("client")) {
+            // Utilisateur déjà connecté -> rediriger vers la page client
+            response.sendRedirect(request.getContextPath() + "/ClientServlet");
+            return;
+        }
+
+
+        // pas de redirection on effectue code normalement
         String message = "";
-        // Afficher la page de login lorsque la requête GET est reçue
-        request.setAttribute("message",message);
+        request.setAttribute("message", message);
         request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
 }
