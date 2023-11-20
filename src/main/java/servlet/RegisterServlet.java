@@ -101,8 +101,6 @@ public class RegisterServlet extends HttpServlet {
                     "[Votre Entreprise/Nom de l'Application]\n");
             email.addTo(emailclient);
             email.send();
-
-            System.out.println("E-mail envoyé avec succès !");
         } catch (EmailException e) {
             e.printStackTrace();
         }

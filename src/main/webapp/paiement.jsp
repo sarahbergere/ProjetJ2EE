@@ -1,7 +1,6 @@
 <%@ page import="entity.CompteBancaire" %>
 <%@ page import="entity.Client" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.Objects" %>
 <%@ page import="java.util.Map" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
@@ -9,7 +8,6 @@
     Client client = (Client) session.getAttribute("client");
     Map<Integer, Integer> panier = (Map<Integer, Integer>) session.getAttribute("panier");
 
-    // Vérifier si le panier est vide, si c'est le cas, rediriger vers panier.jsp
     if ((panier == null || panier.isEmpty()) && (client == null)) {
         response.sendRedirect("panier.jsp");
     }
