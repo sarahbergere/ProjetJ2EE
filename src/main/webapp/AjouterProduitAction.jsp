@@ -13,7 +13,7 @@
         // Établir la connexion à la base de données
         String url = "jdbc:mysql://localhost:3306/ecommerce";
         String username = "root";
-        String password = "cytech0001";
+        String password = "eisti0001";
         conn = DriverManager.getConnection(url, username, password);
 
         // Récupérer les données du formulaire
