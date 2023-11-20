@@ -61,7 +61,7 @@
     // Définir les informations de connexion à la base de données
     String url = "jdbc:mysql://localhost:3306/ecommerce";
     String username = "root";
-    String password = "cytech0001";
+    String password = "eisti0001";
 
     Map<Integer, Integer> panier = (Map<Integer, Integer>) session.getAttribute("panier");
     int quantitePanier = (panier != null && panier.containsKey(idproduct) ? panier.get(idproduct) : 0);
