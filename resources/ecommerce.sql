@@ -91,10 +91,15 @@ CREATE TABLE `commande` (
   `DateDeCommande` date NOT NULL,
   `StatutDeCommande` varchar(20) NOT NULL,
   `montant` double DEFAULT NULL,
+  `Nom` varchar(100) NOT NULL,
+  `Adresse` varchar(100) NOT NULL,
+  `CodePostal` varchar(10) NOT NULL,
+  `Ville` varchar(50) NOT NULL,
+  `Pays` varchar(30) NOT NULL,
   PRIMARY KEY (`idcommande`),
   KEY `IdClient_idx` (`IdClient`),
   CONSTRAINT `commande_client_idclient_fk` FOREIGN KEY (`IdClient`) REFERENCES `client` (`idclient`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +108,7 @@ CREATE TABLE `commande` (
 
 LOCK TABLES `commande` WRITE;
 /*!40000 ALTER TABLE `commande` DISABLE KEYS */;
-INSERT INTO `commande` VALUES (1,5,'2023-11-19','traitement',448);
+INSERT INTO `commande` VALUES (2,6,'2023-11-20','traitement',504,'Bergere Sarah','4 rue des clients','95280','Jouy le Moutier','France');
 /*!40000 ALTER TABLE `commande` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -132,7 +137,7 @@ CREATE TABLE `comptebancaire` (
 
 LOCK TABLES `comptebancaire` WRITE;
 /*!40000 ALTER TABLE `comptebancaire` DISABLE KEYS */;
-INSERT INTO `comptebancaire` VALUES (1,'Gentel-Dehenne Matéo','584 586 785 214',574.85,5),(2,'Bergere sarah','584 586 785 214',7500.00,6),(3,'Bergere Marie','584 58 785',4788.00,6);
+INSERT INTO `comptebancaire` VALUES (1,'Gentel-Dehenne Matéo','584 586 785 214',574.85,5),(2,'Bergere sarah','584 586 785 214',6996.00,6),(3,'Bergere Marie','584 58 785',4788.00,6);
 /*!40000 ALTER TABLE `comptebancaire` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,7 +158,7 @@ CREATE TABLE `detailcommande` (
   KEY `ProduitID_idx` (`ProduitId`),
   CONSTRAINT `CommandeID` FOREIGN KEY (`CommandeId`) REFERENCES `commande` (`idcommande`),
   CONSTRAINT `ProduitID` FOREIGN KEY (`ProduitId`) REFERENCES `produit` (`idproduit`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,7 +167,7 @@ CREATE TABLE `detailcommande` (
 
 LOCK TABLES `detailcommande` WRITE;
 /*!40000 ALTER TABLE `detailcommande` DISABLE KEYS */;
-INSERT INTO `detailcommande` VALUES (2,1,11,2);
+INSERT INTO `detailcommande` VALUES (3,2,13,2);
 /*!40000 ALTER TABLE `detailcommande` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -184,7 +189,7 @@ CREATE TABLE `paiement` (
   KEY `CompteBancaireID_idx` (`CompteBancaireID`),
   CONSTRAINT `CommandeID_paiement` FOREIGN KEY (`CommandeID`) REFERENCES `commande` (`idcommande`),
   CONSTRAINT `CompteBancaireID` FOREIGN KEY (`CompteBancaireID`) REFERENCES `comptebancaire` (`idcompteBancaire`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -193,7 +198,7 @@ CREATE TABLE `paiement` (
 
 LOCK TABLES `paiement` WRITE;
 /*!40000 ALTER TABLE `paiement` DISABLE KEYS */;
-INSERT INTO `paiement` VALUES (2,1,1,448.00,'2023-11-19');
+INSERT INTO `paiement` VALUES (3,2,2,504.00,'2023-11-20');
 /*!40000 ALTER TABLE `paiement` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,7 +226,7 @@ CREATE TABLE `produit` (
 
 LOCK TABLES `produit` WRITE;
 /*!40000 ALTER TABLE `produit` DISABLE KEYS */;
-INSERT INTO `produit` VALUES (10,'Tenue de Pompier','Pour combattre le feu',224.00,3,'https://dodo.ac/np/images/0/0a/Firefighter_Uniform_%28Black%29_NH_Icon.png'),(11,'Costume de Ninja','Pour être le roi des arts martiaux',224.00,6,'https://dodo.ac/np/images/e/e7/Ninja_Costume_%28Dark_Blue%29_NH_Icon.png'),(12,'Robe de Noblesse','Pour être la reine du bal !',520.00,5,'https://dodo.ac/np/images/e/e3/Noble_Dress_%28White%29_NH_Icon.png'),(13,'Robe Victorienne','Pour les fans d\'Histoire',252.00,8,'https://dodo.ac/np/images/9/93/Victorian_Dress_%28Red%29_NH_Icon.png'),(14,'Maillot de Baseball','Pour être le meilleur joueur de baseball',112.00,85,'https://dodo.ac/np/images/1/10/Baseball_Shirt_%28White%29_NH_Icon.png'),(15,'T-Shirt Bonjour','Pour être poli au quotidien ! ',64.00,112,'https://dodo.ac/np/images/f/f9/Bonjour_Tee_NH_Icon.png'),(16,'T-Shirt de Camping','Alors, on attend pas Patrick ?',84.00,92,'https://dodo.ac/np/images/f/ff/Camper_Tee_NH_Icon.png'),(17,'Uniforme de café','jsp',500.00,500,'https://dodo.ac/np/images/6/66/Caf%C3%A9_Uniform_%28Black%29_NH_Icon.png');
+INSERT INTO `produit` VALUES (10,'Tenue de Pompier','Pour combattre le feu',224.00,3,'https://dodo.ac/np/images/0/0a/Firefighter_Uniform_%28Black%29_NH_Icon.png'),(11,'Costume de Ninja','Pour être le roi des arts martiaux',224.00,6,'https://dodo.ac/np/images/e/e7/Ninja_Costume_%28Dark_Blue%29_NH_Icon.png'),(12,'Robe de Noblesse','Pour être la reine du bal !',520.00,5,'https://dodo.ac/np/images/e/e3/Noble_Dress_%28White%29_NH_Icon.png'),(13,'Robe Victorienne','Pour les fans d\'Histoire',252.00,6,'https://dodo.ac/np/images/9/93/Victorian_Dress_%28Red%29_NH_Icon.png'),(14,'Maillot de Baseball','Pour être le meilleur joueur de baseball',112.00,85,'https://dodo.ac/np/images/1/10/Baseball_Shirt_%28White%29_NH_Icon.png'),(15,'T-Shirt Bonjour','Pour être poli au quotidien ! ',64.00,112,'https://dodo.ac/np/images/f/f9/Bonjour_Tee_NH_Icon.png'),(16,'T-Shirt de Camping','Alors, on attend pas Patrick ?',84.00,92,'https://dodo.ac/np/images/f/ff/Camper_Tee_NH_Icon.png'),(17,'Uniforme de café','jsp',500.00,500,'https://dodo.ac/np/images/6/66/Caf%C3%A9_Uniform_%28Black%29_NH_Icon.png');
 /*!40000 ALTER TABLE `produit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -260,4 +265,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-19 23:23:21
+-- Dump completed on 2023-11-20 16:03:33
