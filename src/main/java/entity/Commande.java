@@ -23,17 +23,36 @@ public class Commande {
     @Column(name = "montant")
     private double montant;
 
+    @Column(name = "Nom")
+    private String nom;
+
+    @Column(name = "Adresse")
+    private String adresse;
+
+    @Column(name = "CodePostal")
+    private String codePostal;
+
+    @Column(name = "Ville")
+    private String ville;
+
+    @Column(name = "Pays")
+    private String pays;
+
     public Commande() {
     }
 
-    public Commande(Date date, double montant, String statut, Client client) {
-        this.dateDeCommande = date;
-        this.statutDeCommande = statut;
-        this.montant = montant;
+    public Commande(Client client, Date dateDeCommande, String statutDeCommande, double montant, String nom, String adresse, String codePostal, String ville, String pays) {
         this.client = client;
-
-        client.ajouterCommande(this);
+        this.dateDeCommande = dateDeCommande;
+        this.statutDeCommande = statutDeCommande;
+        this.montant = montant;
+        this.nom = nom;
+        this.adresse = adresse;
+        this.codePostal = codePostal;
+        this.ville = ville;
+        this.pays = pays;
     }
+
     public int getId() {
         return id;
     }
@@ -72,6 +91,46 @@ public class Commande {
 
     public void setMontant(double montant) {
         this.montant = montant;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getCodePostal() {
+        return codePostal;
+    }
+
+    public void setCodePostal(String codePostal) {
+        this.codePostal = codePostal;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+
+    public String getPays() {
+        return pays;
+    }
+
+    public void setPays(String pays) {
+        this.pays = pays;
     }
 }
 

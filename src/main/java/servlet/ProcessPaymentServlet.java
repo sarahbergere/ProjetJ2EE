@@ -71,7 +71,7 @@ public class ProcessPaymentServlet extends HttpServlet {
         }
 
         CommandeDAO commandeDAO = new CommandeDAO();
-        Commande commande = new Commande(date, montantPanier, StatutCommande.traitement.toString(), (Client) session.getAttribute("client"));
+        Commande commande = new Commande((Client) session.getAttribute("client"), date, StatutCommande.traitement.toString(), montantPanier, nom, adresse, codePostal, ville, pays);
         int idCommande = commandeDAO.create(commande);
         session.setAttribute("commande", commande);
 

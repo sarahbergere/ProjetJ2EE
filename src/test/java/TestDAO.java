@@ -60,7 +60,7 @@ public class TestDAO {
         Client client = new Client("gentel dehenne","matéo", "square", "mato@gmail.com", "0601234567");
         client.setId(clientId);
 
-        Commande commande = new Commande(new Date(), 12.5, StatutCommande.expediée.toString() , client);
+        Commande commande = new Commande(client, new Date(), StatutCommande.traitement.toString(), 5, "nn", "nn", "nn", ",,", "nn");
 
         commandeDAO.create(commande);
 
@@ -86,7 +86,7 @@ public class TestDAO {
         Client client = new Client("gentel dehenne","matéo", "square", "mato@gmail.com", "0601234567");
         client.setId(clientId);
 
-        Commande commande = new Commande(new Date(), 12.5, StatutCommande.expediée.toString() , client);
+        Commande commande = new Commande(client, new Date(), StatutCommande.traitement.toString(), 5, "nn", "nn", "nn", ",,", "nn");
 
         commande.setClient(client);
         commande.setDateDeCommande(new Date());
