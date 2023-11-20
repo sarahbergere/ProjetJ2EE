@@ -1,10 +1,8 @@
 package dao;
+import entity.Commande;
 import entity.DetailCommande;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.List;
 
 public class DetailCommandeDAO {
@@ -77,6 +75,14 @@ public class DetailCommandeDAO {
         } finally {
             entityManager.close();
         }
+    }
+
+    public List<DetailCommande> findByCommande(Commande commande) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        String jpql = "SELECT dc FROM DetailCommande dc WHERE dc.commande = :commande";
+        TypedQuery<DetailCommande> query = entityManager.createQuery(jpql, DetailCommande.class);
+        query.setParameter("commande", commande);
+        return query.getResultList();
     }
 }
 

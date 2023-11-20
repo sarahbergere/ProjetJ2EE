@@ -11,13 +11,11 @@ public class Paiement {
     @Column(name = "idPaiement")
     private int id;
 
-    @ManyToOne
     @JoinColumn(name = "CommandeID")
-    private Commande commande;
+    private int commandeID;
 
-    @ManyToOne
     @JoinColumn(name = "CompteBancaireID")
-    private CompteBancaire compteBancaire;
+    private int compteBancaireID;
 
     @Column(name = "Montant")
     private double montantDuPaiement;
@@ -26,9 +24,9 @@ public class Paiement {
 
     }
 
-    public Paiement(Commande commande, CompteBancaire compteBancaire, double montantDuPaiement, Date dateDuPaiement) {
-        this.commande = commande;
-        this.compteBancaire = compteBancaire;
+    public Paiement(int commandeID, int compteBancaireID, double montantDuPaiement, Date dateDuPaiement) {
+        this.commandeID = commandeID;
+        this.compteBancaireID = compteBancaireID;
         this.montantDuPaiement = montantDuPaiement;
         this.dateDuPaiement = dateDuPaiement;
     }
@@ -44,20 +42,20 @@ public class Paiement {
         this.id = id;
     }
 
-    public Commande getCommande() {
-        return commande;
+    public int getCommande() {
+        return commandeID;
     }
 
-    public void setCommande(Commande commande) {
-        this.commande = commande;
+    public void setCommande(int commande) {
+        this.commandeID = commande;
     }
 
-    public CompteBancaire getCompteBancaire() {
-        return compteBancaire;
+    public int getCompteBancaire() {
+        return compteBancaireID;
     }
 
-    public void setCompteBancaire(CompteBancaire compteBancaire) {
-        this.compteBancaire = compteBancaire;
+    public void setCompteBancaire(int compteBancaire) {
+        this.compteBancaireID = compteBancaire;
     }
 
     public double getMontantDuPaiement() {

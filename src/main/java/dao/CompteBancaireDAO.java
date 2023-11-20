@@ -8,14 +8,17 @@ import java.util.List;
 public class CompteBancaireDAO {
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Persistence");
 
-    public void create(CompteBancaire compteBancaire) {
+    public int create(CompteBancaire compteBancaire) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
 
+        int generatedId = 0;
         try {
             transaction.begin();
-            entityManager.merge(compteBancaire);
+            entityManager.persist(compteBancaire);
             transaction.commit();
+
+            generatedId = compteBancaire.getId();
         } catch (Exception e) {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
@@ -24,6 +27,7 @@ public class CompteBancaireDAO {
         } finally {
             entityManager.close();
         }
+        return generatedId;
     }
 
     public CompteBancaire findById(int id) {
