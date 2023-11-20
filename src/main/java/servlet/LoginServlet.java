@@ -60,14 +60,6 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        HttpSession session = request.getSession(false); // Ne crée pas de nouvelle session s'il n'y en a pas
-        //verifie si session existe et si utilisateur est déjà connecté
-        if (session != null && session.getAttribute("role") != null && session.getAttribute("role").equals("client")) {
-
-            response.sendRedirect(request.getContextPath() + "/ClientServlet"); // si déjà connecté redirige vers son compte
-;        }
-
         String message = "";
         // Afficher la page de login lorsque la requête GET est reçue
         request.setAttribute("message",message);
