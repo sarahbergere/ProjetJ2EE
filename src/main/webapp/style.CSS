@@ -19,7 +19,7 @@ body {
     align-items: center; /* Alignement vertical au centre */
 }
 
-.neumorphic-header button {
+button {
     padding: 0.5em 1.5em;
     background: #efefef;
     border: none;
@@ -37,14 +37,14 @@ body {
     6px 6px 10px rgba(0, 0, 0, .15);
 }
 
-.neumorphic-header button:hover {
+button:hover {
     box-shadow: -2px -2px 6px rgba(255, 255, 255, .6),
     -2px -2px 4px rgba(255, 255, 255, .4),
     2px 2px 2px rgba(255, 255, 255, .05),
     2px 2px 4px rgba(0, 0, 0, .1);
 }
 
-.neumorphic-header button:active {
+button:active {
     box-shadow: inset -2px -2px 6px rgba(255, 255, 255, .7),
     inset -2px -2px 4px rgba(255, 255, 255, .5),
     inset 2px 2px 2px rgba(255, 255, 255, .075),
