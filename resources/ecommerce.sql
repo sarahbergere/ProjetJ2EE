@@ -75,7 +75,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES (1,'Ndeugoue','Marcus','12 boulevard de lhautil','ndeugoue@cy-tech.fr','0612345678',2,'modification'),(2,'Dehaud','Laure','1 square des abricots','laure.dehaud@gmail.com','0612345678',3,'aucun'),(4,'Bergere','Marie','1 square des abricots','bergeresar@cy-tech.fr','0612345678',5,'tout'),(5,'Gentel Dehenne','Matéo','12 boulevard de lhautil','genteldehe@cy-tech.fr','0612345678',6,'aucun'),(6,'Bergere','sarah','12 boulevard de lhautil','bergeresar@cy-tech.fr','0612345678',7,'aucun');
+INSERT INTO `client` VALUES (1,'Ndeugoue','Marcus','12 boulevard de lhautil','ndeugouema@cy-tech.fr','0612345678',2,'modification'),(2,'Dehaud','Laure','1 square des abricots','bergeresar@cy-tech.fr','0612345678',3,'aucun'),(4,'Bergere','Marie','1 square des abricots','bergeresar@cy-tech.fr','0612345678',5,'tout'),(5,'Gentel Dehenne','Matéo','12 boulevard de lhautil','genteldehe@cy-tech.fr','0612345678',6,'aucun'),(6,'Bergere','sarah','12 boulevard de lhautil','bergeresar@cy-tech.fr','0612345678',7,'aucun');
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,7 +100,7 @@ CREATE TABLE `commande` (
   PRIMARY KEY (`idcommande`),
   KEY `IdClient_idx` (`IdClient`),
   CONSTRAINT `commande_client_idclient_fk` FOREIGN KEY (`IdClient`) REFERENCES `client` (`idclient`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,7 +109,7 @@ CREATE TABLE `commande` (
 
 LOCK TABLES `commande` WRITE;
 /*!40000 ALTER TABLE `commande` DISABLE KEYS */;
-INSERT INTO `commande` VALUES (2,6,'2023-11-20','traitement',504,'Bergere Sarah','4 rue des clients','95280','Jouy le Moutier','France');
+INSERT INTO `commande` VALUES (2,6,'2023-11-20','traitement',504,'Bergere Sarah','4 rue des clients','95280','Jouy le Moutier','France'),(3,1,'2023-11-25','traitement',90,'Marcus Ndeugoue','Avenue du Parc','95000','Cergy','France'),(4,4,'2023-11-25','traitement',109,'Marie Bergere','Avenue du parc','95000','Cergy','France');
 /*!40000 ALTER TABLE `commande` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,7 +129,7 @@ CREATE TABLE `comptebancaire` (
   PRIMARY KEY (`idcompteBancaire`),
   KEY `comptebancaire_client_idclient_fk` (`ClientID`),
   CONSTRAINT `comptebancaire_client_idclient_fk` FOREIGN KEY (`ClientID`) REFERENCES `client` (`idclient`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -138,7 +138,7 @@ CREATE TABLE `comptebancaire` (
 
 LOCK TABLES `comptebancaire` WRITE;
 /*!40000 ALTER TABLE `comptebancaire` DISABLE KEYS */;
-INSERT INTO `comptebancaire` VALUES (1,'Gentel-Dehenne Matéo','584 586 785 214',574.85,5),(2,'Bergere sarah','584 586 785 214',6996.00,6),(3,'Bergere Marie','584 58 785',4788.00,6);
+INSERT INTO `comptebancaire` VALUES (1,'Gentel-Dehenne Matéo','584 586 785 214',574.85,5),(2,'Bergere sarah','584 586 785 214',6996.00,6),(3,'Bergere Marie','584 58 785',4788.00,6),(4,'Marcus Ndeugoue','584 586 785 621',45687.00,1),(5,'Marie Bergere','584 100 765 888',45779.00,4);
 /*!40000 ALTER TABLE `comptebancaire` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,7 +159,7 @@ CREATE TABLE `detailcommande` (
   KEY `ProduitID_idx` (`ProduitId`),
   CONSTRAINT `CommandeID` FOREIGN KEY (`CommandeId`) REFERENCES `commande` (`idcommande`),
   CONSTRAINT `ProduitID` FOREIGN KEY (`ProduitId`) REFERENCES `produit` (`idproduit`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,7 +168,7 @@ CREATE TABLE `detailcommande` (
 
 LOCK TABLES `detailcommande` WRITE;
 /*!40000 ALTER TABLE `detailcommande` DISABLE KEYS */;
-INSERT INTO `detailcommande` VALUES (3,2,13,2);
+INSERT INTO `detailcommande` VALUES (3,2,13,2),(4,3,20,2),(5,4,20,1),(6,4,15,1);
 /*!40000 ALTER TABLE `detailcommande` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,7 +190,7 @@ CREATE TABLE `paiement` (
   KEY `CompteBancaireID_idx` (`CompteBancaireID`),
   CONSTRAINT `CommandeID_paiement` FOREIGN KEY (`CommandeID`) REFERENCES `commande` (`idcommande`),
   CONSTRAINT `CompteBancaireID` FOREIGN KEY (`CompteBancaireID`) REFERENCES `comptebancaire` (`idcompteBancaire`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,7 +199,7 @@ CREATE TABLE `paiement` (
 
 LOCK TABLES `paiement` WRITE;
 /*!40000 ALTER TABLE `paiement` DISABLE KEYS */;
-INSERT INTO `paiement` VALUES (3,2,2,504.00,'2023-11-20');
+INSERT INTO `paiement` VALUES (3,2,2,504.00,'2023-11-20'),(4,3,4,90.00,'2023-11-25'),(5,4,5,109.00,'2023-11-25');
 /*!40000 ALTER TABLE `paiement` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,7 +227,7 @@ CREATE TABLE `produit` (
 
 LOCK TABLES `produit` WRITE;
 /*!40000 ALTER TABLE `produit` DISABLE KEYS */;
-INSERT INTO `produit` VALUES (10,'Tenue de Pompier','Pour combattre le feu',224.00,3,'https://dodo.ac/np/images/0/0a/Firefighter_Uniform_%28Black%29_NH_Icon.png'),(11,'Costume de Ninja','Pour être le roi des arts martiaux',224.00,6,'https://dodo.ac/np/images/e/e7/Ninja_Costume_%28Dark_Blue%29_NH_Icon.png'),(12,'Robe de Noblesse','Pour être la reine du bal !',520.00,5,'https://dodo.ac/np/images/e/e3/Noble_Dress_%28White%29_NH_Icon.png'),(13,'Robe Victorienne','Pour les fans d\'Histoire',252.00,6,'https://dodo.ac/np/images/9/93/Victorian_Dress_%28Red%29_NH_Icon.png'),(14,'Maillot de Baseball','Pour être le meilleur joueur de baseball',112.00,85,'https://dodo.ac/np/images/1/10/Baseball_Shirt_%28White%29_NH_Icon.png'),(15,'T-Shirt Bonjour','Pour être poli au quotidien ! ',64.00,112,'https://dodo.ac/np/images/f/f9/Bonjour_Tee_NH_Icon.png'),(16,'T-Shirt de Camping','Alors, on attend pas Patrick ?',84.00,92,'https://dodo.ac/np/images/f/ff/Camper_Tee_NH_Icon.png'),(17,'Uniforme de café','Parfait pour votre nouveau travail de serveur.',500.00,500,'https://dodo.ac/np/images/6/66/Caf%C3%A9_Uniform_%28Black%29_NH_Icon.png'),(20,'Jupe école','Jupe parfaite pour vos tenues d\'automne !',45.00,4,'https://dodo.ac/np/images/3/36/Checkered_School_Skirt_%28Dark_Gray%29_NH_Icon.png');
+INSERT INTO `produit` VALUES (10,'Tenue de Pompier','Pour combattre le feu',224.00,3,'https://dodo.ac/np/images/0/0a/Firefighter_Uniform_%28Black%29_NH_Icon.png'),(11,'Costume de Ninja','Pour être le roi des arts martiaux',224.00,6,'https://dodo.ac/np/images/e/e7/Ninja_Costume_%28Dark_Blue%29_NH_Icon.png'),(12,'Robe de Noblesse','Pour être la reine du bal !',520.00,5,'https://dodo.ac/np/images/e/e3/Noble_Dress_%28White%29_NH_Icon.png'),(13,'Robe Victorienne','Pour les fans d\'Histoire',252.00,6,'https://dodo.ac/np/images/9/93/Victorian_Dress_%28Red%29_NH_Icon.png'),(14,'Maillot de Baseball','Pour être le meilleur joueur de baseball',112.00,85,'https://dodo.ac/np/images/1/10/Baseball_Shirt_%28White%29_NH_Icon.png'),(15,'T-Shirt Bonjour','Pour être poli au quotidien ! ',64.00,111,'https://dodo.ac/np/images/f/f9/Bonjour_Tee_NH_Icon.png'),(16,'T-Shirt de Camping','Alors, on attend pas Patrick ?',84.00,92,'https://dodo.ac/np/images/f/ff/Camper_Tee_NH_Icon.png'),(17,'Uniforme de café','Parfait pour votre nouveau travail de serveur.',500.00,500,'https://dodo.ac/np/images/6/66/Caf%C3%A9_Uniform_%28Black%29_NH_Icon.png'),(20,'Jupe école','Jupe parfaite pour vos tenues d\'automne !',45.00,8,'https://dodo.ac/np/images/3/36/Checkered_School_Skirt_%28Dark_Gray%29_NH_Icon.png');
 /*!40000 ALTER TABLE `produit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -266,4 +266,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-25 18:54:05
+-- Dump completed on 2023-11-25 22:00:30
