@@ -1,10 +1,7 @@
 
 import dao.CommandeDAO;
 import dao.ProduitDAO;
-import entity.Client;
-import entity.Commande;
-import entity.Produit;
-import entity.StatutCommande;
+import entity.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -57,7 +54,7 @@ public class TestDAO {
     public void testCreateAndUpdateCommande() {
         int clientId = 2;
 
-        Client client = new Client("gentel dehenne","matéo", "square", "mato@gmail.com", "0601234567");
+        Client client = new Client("gentel dehenne","matéo", "square", "mato@gmail.com", "0601234567", Droit.aucun.toString());
         client.setId(clientId);
 
         Commande commande = new Commande(client, new Date(), StatutCommande.traitement.toString(), 5, "nn", "nn", "nn", ",,", "nn");
@@ -83,7 +80,7 @@ public class TestDAO {
         int clientId = 2;
 
         // Vous pouvez créer un client factice avec seulement l'ID
-        Client client = new Client("gentel dehenne","matéo", "square", "mato@gmail.com", "0601234567");
+        Client client = new Client("gentel dehenne","matéo", "square", "mato@gmail.com", "0601234567",Droit.aucun.toString());
         client.setId(clientId);
 
         Commande commande = new Commande(client, new Date(), StatutCommande.traitement.toString(), 5, "nn", "nn", "nn", ",,", "nn");

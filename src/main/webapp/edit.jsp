@@ -33,15 +33,23 @@
         // Vérifier s'il y a un résultat (il devrait y en avoir un, car le nom du produit est unique)
         if (resultSet.next()) {
             // Récupérer les informations du produit
+            String nom = resultSet.getString("Nom");
             double prix = resultSet.getDouble("Prix");
+            String description = resultSet.getString("Description");
             int stock = resultSet.getInt("Stock");
             String imageUrl = resultSet.getString("Image");
     %>
 
     <form action="updateProduct.jsp" method="post">
         <input type="hidden" name="productName" value="<%= productName %>">
+        <label for="nom">Nom:</label>
+        <input type="text" name="nom" value="<%= nom %>">
+        <br>
         <label for="price">Prix:</label>
         <input type="text" name="price" value="<%= prix %>">
+        <br>
+        <label for="description">Description:</label>
+        <input type="text" name="description" value="<%= description %>">
         <br>
         <label for="stock">Stock:</label>
         <input type="text" name="stock" value="<%= stock %>">
@@ -60,7 +68,6 @@
     <%
         }
 
-        // Fermer les ressources
         resultSet.close();
         preparedStatement.close();
         connection.close();

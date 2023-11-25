@@ -70,7 +70,7 @@ public class ClientDAO {
 
     public List<Client> findAll() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        List<Client> clients = entityManager.createQuery("SELECT c FROM client c", Client.class)
+        List<Client> clients = entityManager.createQuery("SELECT c FROM Client c", Client.class)
                 .getResultList();
         entityManager.close();
         return clients;

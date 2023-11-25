@@ -10,11 +10,9 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">cytech0001</property>
 
-        <!-- Options de journalisation -->
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
 
-        <!-- Entités à scanner-->
         <mapping class="entity.Administrateur" />
         <mapping class="entity.Client" />
         <mapping class="entity.Commande"/>
@@ -23,8 +21,7 @@
         <mapping class="entity.Paiement"/>
         <mapping class="entity.Produit"/>
         <mapping class="entity.Role"/>
+        <mapping class="entity.StatutCommande"/>
         <mapping class="entity.Utilisateur"/>
-
-
     </session-factory>
 </hibernate-configuration>

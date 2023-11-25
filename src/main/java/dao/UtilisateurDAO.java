@@ -10,13 +10,6 @@ import javax.persistence.Persistence;
 public class UtilisateurDAO {
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Persistence");
 
-    public UtilisateurDAO(EntityManagerFactory entityManagerFactory) {
-        this.entityManagerFactory = entityManagerFactory;
-    }
-
-    public UtilisateurDAO(){
-
-    }
 
     public int create(Utilisateur utilisateur) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();

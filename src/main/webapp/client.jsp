@@ -6,41 +6,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Page Client</title>
+    <link rel="stylesheet" type="text/css" href="style.CSS">
     <style>
         body {
             font-family: Arial, sans-serif;
-        }
-        #site {
-            color :white;
-        }
-        header {
-             background-color: #333;
-             padding: 20px;
-             display: flex;
-             justify-content: space-between;
-             align-items: center;
-            border-radius: 50px;
-         }
-
-        .icon:hover {
-            transform: scale(1.2);
-        }
-
-        .icon {
-            width: 30px;
-            height: 30px;
-            padding: 5px;
-            transition: transform 0.3s ease-in-out;
-        }
-        .logout-form {
-            display: inline-block;
-        }
-
-        #logout-button {
-            background: none;
-            border: none;
-            padding: 0;
-            cursor: pointer;
         }
 
         .content {
@@ -69,6 +38,10 @@
 
         th {
             background-color: #f2f2f2;
+        }
+
+        ul {
+            list-style-type: none;
         }
 
         #suppCompte{
@@ -113,11 +86,17 @@
 </head>
 <body>
 <header>
-    <h1 id="site">Notre site</h1>
-    <nav>
-        <a href="panier.jsp"><img class="icon" src="img/basket.png" alt="cart icon"></a>
-        <a href="LogoutServlet"><img class="icon" src="img/logout.png" alt="logout icon"></a>
-    </nav>
+    <div class="neumorphic-header">
+        <div>
+            <a href="bienvenue.jsp"><button>Accueil</button></a>
+            <a href="affichageProduit.jsp"><button>A la une</button></a>
+        </div>
+        <h1>Marketplace</h1>
+        <div>
+            <a href="panier.jsp"><button>Mon Panier</button></a>
+            <a href="LogoutServlet"><button>Se d&eacute;connecter</button></a>
+        </div>
+    </div>
 </header>
 <div class="content">
     <h1>Bienvenue, ${sessionScope.pseudo}</h1>
@@ -129,6 +108,8 @@
         Nom : ${sessionScope.client.nom} <br>
         Prénom : ${sessionScope.client.prenom} <br></p>
     </div>
+
+    <%= session.getAttribute("modifierProduit") %>
 
     <hr>
     <h2>Commandes passées</h2>
@@ -165,12 +146,12 @@
             <ul>
                 <c:forEach var="compte" items="${sessionScope.client.comptes}">
                     <li>${compte.titulaireDuCompte} - ${compte.numeroDeCompte} - ${compte.solde} €
-                        <form action="DeleteBankAccountServlet" method="post" style="display:inline;">
+                        <form action="DeleteBankAccountServlet" method="post" style="display:inline;padding:0">
                             <input type="hidden" name="compteId" value="${compte.id}">
                             <input type="hidden" name="nomcompte" value="${compte.titulaireDuCompte}">
                             <input id="suppCompte" type="submit" value="Supprimer le compte">
                         </form>
-                    </li>
+                    </li><br>
                 </c:forEach>
             </ul>
         </c:otherwise>
@@ -187,6 +168,7 @@
         <input type="number" id="solde" name="solde" step="0.01" required><br>
         <input type="submit" value="Ajouter le compte">
     </form>
-</div>
+</div> <br>
+
 </body>
 </html>

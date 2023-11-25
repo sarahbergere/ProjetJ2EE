@@ -11,7 +11,9 @@
 
   <%
     // Récupérer les paramètres du formulaire
+    String nom = request.getParameter("nom");
     String productName = request.getParameter("productName");
+    String description = request.getParameter("description");
     double price = Double.parseDouble(request.getParameter("price"));
     int stock = Integer.parseInt(request.getParameter("stock"));
     String imageUrl = request.getParameter("imageUrl");
@@ -28,12 +30,14 @@
     Connection connection = DriverManager.getConnection(url, username, password);
 
     // Créer la requête SQL pour mettre à jour les informations du produit
-    String sqlQuery = "UPDATE Produit SET Prix=?, Stock=?, Image=? WHERE Nom=?";
+    String sqlQuery = "UPDATE Produit SET Nom=?, Prix=?, Stock=?, Image=?, Description=? WHERE Nom=?";
     PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
-    preparedStatement.setDouble(1, price);
-    preparedStatement.setInt(2, stock);
-    preparedStatement.setString(3, imageUrl);
-    preparedStatement.setString(4, productName);
+    preparedStatement.setString(1, nom);
+    preparedStatement.setDouble(2, price);
+    preparedStatement.setInt(3, stock);
+    preparedStatement.setString(4, imageUrl);
+    preparedStatement.setString(5,description);
+    preparedStatement.setString(6,productName);
 
     // Exécuter la mise à jour
     int rowsAffected = preparedStatement.executeUpdate();

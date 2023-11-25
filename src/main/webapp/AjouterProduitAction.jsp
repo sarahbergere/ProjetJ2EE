@@ -7,19 +7,18 @@
     Statement stmt = null;
 
     try {
-        // Charger le driver JDBC
         Class.forName("com.mysql.cj.jdbc.Driver");
 
-        // Établir la connexion à la base de données
         String url = "jdbc:mysql://localhost:3306/ecommerce";
         String username = "root";
-        String password = "eisti0001";
+        String password = "cytech0001";
         conn = DriverManager.getConnection(url, username, password);
 
         // Récupérer les données du formulaire
         String nom = request.getParameter("nom");
         int prix = Integer.parseInt(request.getParameter("prix"));
         String description = request.getParameter("description");
+        System.out.println(description);
         int stock = Integer.parseInt(request.getParameter("stock"));
         String image = request.getParameter("image");
 
@@ -39,7 +38,6 @@
                 // Rediriger vers affichageProduit.jsp si le produit est ajouté avec succès
                 response.sendRedirect("affichageProduit.jsp");
             } else {
-                // Rediriger vers addProduit.jsp sinon
                 response.sendRedirect("addProduit.jsp");
             }
         }

@@ -30,6 +30,8 @@ public class Client {
     @Column(name = "Telephone")
     private String numeroTelephone;
 
+    @Column(name = "Droit")
+    private String droit;
 
     @Column(name = "idUtilisateur")
     private int idUtilisateur;
@@ -42,13 +44,14 @@ public class Client {
 
     public Client(){    }
 
-    public Client(String nom, String prenom, String adresse,String email, String numeroTelephone) {
+    public Client(String nom, String prenom, String adresse,String email, String numeroTelephone, String droit) {
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
         this.adresseEmail = email;
         this.numeroTelephone = numeroTelephone;
         this.commandes = new ArrayList<>();
+        this.droit = droit;
 
         this.chargerCommande();
         this.chargerCompteBancaire();
@@ -137,4 +140,13 @@ public class Client {
     public List<Commande> getCommandes() {
         return this.commandes;
     }
+
+    public String getDroit() {
+        return droit;
+    }
+
+    public void setDroit(String droit) {
+        this.droit = droit;
+    }
+
 }

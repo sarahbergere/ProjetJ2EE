@@ -23,7 +23,6 @@ public class LoginServlet extends HttpServlet {
         String login = request.getParameter("pseudo");
         String password = request.getParameter("password");
 
-        // Vérifiez si l'utilisateur est un client
         ClientDAO clientDAO = new ClientDAO();
         Client client = clientDAO.findByUsername(login);
 
@@ -33,47 +32,36 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("pseudo", login);
                 session.setAttribute("client", client);
                 session.setAttribute("role", "client");
-                response.sendRedirect(request.getContextPath() + "/ClientServlet");
+                response.sendRedirect(request.getContextPath() + "/AccountServlet");
                 return;
             }
-
         } catch (
                 NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
 
-        // Si ce n'est pas un client, vérifiez si c'est un administrateur
         AdministrateurDAO administrateurDAO = new AdministrateurDAO();
         Administrateur administrateur = administrateurDAO.findByUsername(login);
 
-
-        if (administrateur != null && administrateurDAO.getPasswordById(administrateur.getIdUtilisateur()).equals(password)) {
-            request.getRequestDispatcher("/admin.jsp").forward(request, response);
-            return;
+        try{
+            if (administrateur != null && administrateurDAO.getPasswordById(administrateur.getIdUtilisateur()).equals(Password.hashPassword(password))) {
+                HttpSession session = request.getSession(true);
+                session.setAttribute("role", "admin");
+                response.sendRedirect(request.getContextPath() + "/AccountServlet");
+                return;
+            }
+        } catch (
+        NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
-
-        // Les identifiants sont incorrects, afficher un message d'erreur
 
         message = "Le nom d'utilisateur ou le mot de passe est incorrect. Veuillez réessayer.";
         request.setAttribute("message",message);
         request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        HttpSession session = request.getSession(false); // Ne crée pas de nouvelle session s'il n'y en a pas
-
-        // Vérifie si session existe et si l'utilisateur déjà connecté en tant que client
-        if (session != null && session.getAttribute("role") != null && session.getAttribute("role").equals("client")) {
-            // Utilisateur déjà connecté -> rediriger vers la page client
-            response.sendRedirect(request.getContextPath() + "/ClientServlet");
-            return;
-        }
-
-
-        // pas de redirection on effectue code normalement
         String message = "";
-        request.setAttribute("message", message);
+        request.setAttribute("message",message);
         request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
 }

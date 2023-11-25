@@ -3,6 +3,7 @@ package servlet;
 import dao.ClientDAO;
 import dao.UtilisateurDAO;
 import entity.Client;
+import entity.Droit;
 import entity.Role;
 import entity.Utilisateur;
 import jakarta.servlet.ServletException;
@@ -41,14 +42,11 @@ public class RegisterServlet extends HttpServlet {
             message = "Veuillez remplir tous les champs du formulaire.";
         } else {
 
-            ClientDAO clientdao = new ClientDAO();
+            ClientDAO clientDAO = new ClientDAO();
 
-            if(clientdao.findByUsername(pseudo) == null ){
+            if(clientDAO.findByUsername(pseudo) == null ){
 
-                EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Persistence");
-
-                ClientDAO clientDAO = new ClientDAO(entityManagerFactory);
-                UtilisateurDAO utilisateurDAO = new UtilisateurDAO(entityManagerFactory);
+                UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
 
                 Utilisateur utilisateur = new Utilisateur();
                 utilisateur.setPseudo(pseudo);
@@ -59,25 +57,21 @@ public class RegisterServlet extends HttpServlet {
                 }
                 utilisateur.setRole(Role.client);
 
+
                 int idUtilisateur = utilisateurDAO.create(utilisateur);
 
                 if (idUtilisateur != 0) {
-                    Client nouveauClient = new Client(nom, prenom, adresse,email,telephone);
+                    Client nouveauClient = new Client(nom, prenom, adresse,email,telephone, Droit.aucun.toString());
                     nouveauClient.setIdUtilisateur(idUtilisateur);
 
                     clientDAO.create(nouveauClient);
-
                     sendEmail(email, prenom);
 
                     message = "Le compte a été créé avec succès Un e-mail de confirmation a été envoyé à " + email;
                 } else {
                     message = "Erreur lors de la création du compte. Veuillez réessayer.";
                 }
-
-                entityManagerFactory.close();
-
             }
-
             else{
                 message = "Pseudonyme déjà utilisé.";
             }
