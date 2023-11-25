@@ -16,7 +16,6 @@ import java.util.Map;
 public class UpdateCartServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Récupérer les paramètres du formulaire
         int productId = Integer.parseInt(request.getParameter("productId"));
         int newQuantity = Integer.parseInt(request.getParameter("quantity"));
 

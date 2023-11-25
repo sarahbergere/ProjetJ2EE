@@ -25,6 +25,7 @@ public class ClientServlet extends HttpServlet {
 
             session.setAttribute("modifierProduit", modifierProduit);
             client.chargerCompteBancaire();
+            client.chargerCommande();
 
             request.getRequestDispatcher("/client.jsp").forward(request, response);
         } else {

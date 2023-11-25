@@ -18,10 +18,15 @@ public class ValiderPanierServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
 
         boolean clientConnecte = (session.getAttribute("client") != null);
+        boolean admin = session.getAttribute("role") == "admin";
 
-        if (clientConnecte) {
+        if (admin) {
+            errorMessage = "Vous êtes administrateur vous ne pouvez pas acheter de produits.";
+            session.setAttribute("erreurMessage", errorMessage);
+            response.sendRedirect(request.getContextPath() + "/panier.jsp");
+        } else if (clientConnecte) {
             response.sendRedirect(request.getContextPath() + "/paiement.jsp");
-        } else {
+        } else if(clientConnecte == false) {
             errorMessage = "Vous devez être connecté pour valider votre panier. Connectez-vous <a href='LoginServlet'>ici</a>";
             session.setAttribute("erreurMessage", errorMessage);
             response.sendRedirect(request.getContextPath() + "/panier.jsp");

@@ -1,7 +1,19 @@
 <%@ page import="entity.Commande" %>
 <%@ page import="entity.DetailCommande" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="entity.Client" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+    Client client = (Client) session.getAttribute("client");
+    Map<Integer, Integer> panier = (Map<Integer, Integer>) session.getAttribute("panier");
+
+    if ((panier == null || panier.isEmpty()) || (client == null)) {
+        response.sendRedirect("panier.jsp");
+    }
+%>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Confirmation de commande</title>

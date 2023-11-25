@@ -1,7 +1,6 @@
 package dao;
 
 import entity.Administrateur;
-import entity.Client;
 
 import javax.persistence.*;
 import java.util.List;

@@ -14,13 +14,11 @@ public class AccountServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Votre code de gestion pour les requêtes GET
         processRequest(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Votre code de gestion pour les requêtes POST
         processRequest(request, response);
     }
 

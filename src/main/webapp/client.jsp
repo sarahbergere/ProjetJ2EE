@@ -1,3 +1,4 @@
+<%@ page import="dao.DetailCommandeDAO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -85,6 +86,10 @@
     </style>
 </head>
 <body>
+<%
+    DetailCommandeDAO detailCommandeDAO = new DetailCommandeDAO();
+
+%>
 <header>
     <div class="neumorphic-header">
         <div>
@@ -118,13 +123,13 @@
             <p>Il n'y a pas encore de commande pour ce client.</p>
         </c:when>
         <c:otherwise>
-
             <table>
                 <tr>
                     <th>Date</th>
-                    <th>Produit</th>
-                    <th>Quantité</th>
+                    <th>Statut de Commande</th>
+                    <th>Total</th>
                 </tr>
+
                 <c:forEach var="commande" items="${sessionScope.client.commandes}">
                     <tr>
                         <td>${commande.dateDeCommande}</td>
