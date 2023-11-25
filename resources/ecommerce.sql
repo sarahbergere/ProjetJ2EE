@@ -62,6 +62,7 @@ CREATE TABLE `client` (
   `Email` varchar(100) NOT NULL,
   `Telephone` varchar(20) NOT NULL,
   `idUtilisateur` int NOT NULL,
+  `Droit` enum('aucun','modification','ajout','suppression','tout') NOT NULL,
   PRIMARY KEY (`idclient`),
   KEY `client_utilisateur_id_fk` (`idUtilisateur`),
   CONSTRAINT `client_utilisateur_id_fk` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`id`)
@@ -74,7 +75,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES (1,'Ndeugoue','Marcus','12 boulevard de lhautil','ndeugoue@cy-tech.fr','0612345678',2),(2,'Dehaud','Laure','1 square des abricots','laure.dehaud@gmail.com','0612345678',3),(4,'Bergere','Marie','1 square des abricots','bergeresar@cy-tech.fr','0612345678',5),(5,'Gentel Dehenne','Matéo','12 boulevard de lhautil','genteldehe@cy-tech.fr','0612345678',6),(6,'Bergere','sarah','12 boulevard de lhautil','bergeresar@cy-tech.fr','0612345678',7);
+INSERT INTO `client` VALUES (1,'Ndeugoue','Marcus','12 boulevard de lhautil','ndeugoue@cy-tech.fr','0612345678',2,'modification'),(2,'Dehaud','Laure','1 square des abricots','laure.dehaud@gmail.com','0612345678',3,'aucun'),(4,'Bergere','Marie','1 square des abricots','bergeresar@cy-tech.fr','0612345678',5,'tout'),(5,'Gentel Dehenne','Matéo','12 boulevard de lhautil','genteldehe@cy-tech.fr','0612345678',6,'aucun'),(6,'Bergere','sarah','12 boulevard de lhautil','bergeresar@cy-tech.fr','0612345678',7,'aucun');
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,12 +213,12 @@ DROP TABLE IF EXISTS `produit`;
 CREATE TABLE `produit` (
   `idproduit` int NOT NULL AUTO_INCREMENT,
   `Nom` varchar(100) NOT NULL,
-  `Description` mediumtext,
+  `Description` varchar(250) DEFAULT NULL,
   `Prix` decimal(10,2) NOT NULL,
   `Stock` int NOT NULL,
   `Image` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`idproduit`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -226,7 +227,7 @@ CREATE TABLE `produit` (
 
 LOCK TABLES `produit` WRITE;
 /*!40000 ALTER TABLE `produit` DISABLE KEYS */;
-INSERT INTO `produit` VALUES (10,'Tenue de Pompier','Pour combattre le feu',224.00,3,'https://dodo.ac/np/images/0/0a/Firefighter_Uniform_%28Black%29_NH_Icon.png'),(11,'Costume de Ninja','Pour être le roi des arts martiaux',224.00,6,'https://dodo.ac/np/images/e/e7/Ninja_Costume_%28Dark_Blue%29_NH_Icon.png'),(12,'Robe de Noblesse','Pour être la reine du bal !',520.00,5,'https://dodo.ac/np/images/e/e3/Noble_Dress_%28White%29_NH_Icon.png'),(13,'Robe Victorienne','Pour les fans d\'Histoire',252.00,6,'https://dodo.ac/np/images/9/93/Victorian_Dress_%28Red%29_NH_Icon.png'),(14,'Maillot de Baseball','Pour être le meilleur joueur de baseball',112.00,85,'https://dodo.ac/np/images/1/10/Baseball_Shirt_%28White%29_NH_Icon.png'),(15,'T-Shirt Bonjour','Pour être poli au quotidien ! ',64.00,112,'https://dodo.ac/np/images/f/f9/Bonjour_Tee_NH_Icon.png'),(16,'T-Shirt de Camping','Alors, on attend pas Patrick ?',84.00,92,'https://dodo.ac/np/images/f/ff/Camper_Tee_NH_Icon.png'),(17,'Uniforme de café','jsp',500.00,500,'https://dodo.ac/np/images/6/66/Caf%C3%A9_Uniform_%28Black%29_NH_Icon.png');
+INSERT INTO `produit` VALUES (10,'Tenue de Pompier','Pour combattre le feu',224.00,3,'https://dodo.ac/np/images/0/0a/Firefighter_Uniform_%28Black%29_NH_Icon.png'),(11,'Costume de Ninja','Pour être le roi des arts martiaux',224.00,6,'https://dodo.ac/np/images/e/e7/Ninja_Costume_%28Dark_Blue%29_NH_Icon.png'),(12,'Robe de Noblesse','Pour être la reine du bal !',520.00,5,'https://dodo.ac/np/images/e/e3/Noble_Dress_%28White%29_NH_Icon.png'),(13,'Robe Victorienne','Pour les fans d\'Histoire',252.00,6,'https://dodo.ac/np/images/9/93/Victorian_Dress_%28Red%29_NH_Icon.png'),(14,'Maillot de Baseball','Pour être le meilleur joueur de baseball',112.00,85,'https://dodo.ac/np/images/1/10/Baseball_Shirt_%28White%29_NH_Icon.png'),(15,'T-Shirt Bonjour','Pour être poli au quotidien ! ',64.00,112,'https://dodo.ac/np/images/f/f9/Bonjour_Tee_NH_Icon.png'),(16,'T-Shirt de Camping','Alors, on attend pas Patrick ?',84.00,92,'https://dodo.ac/np/images/f/ff/Camper_Tee_NH_Icon.png'),(17,'Uniforme de café','Parfait pour votre nouveau travail de serveur.',500.00,500,'https://dodo.ac/np/images/6/66/Caf%C3%A9_Uniform_%28Black%29_NH_Icon.png'),(20,'Jupe école',NULL,45.00,4,'https://dodo.ac/np/images/3/36/Checkered_School_Skirt_%28Dark_Gray%29_NH_Icon.png');
 /*!40000 ALTER TABLE `produit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -252,7 +253,7 @@ CREATE TABLE `utilisateur` (
 
 LOCK TABLES `utilisateur` WRITE;
 /*!40000 ALTER TABLE `utilisateur` DISABLE KEYS */;
-INSERT INTO `utilisateur` VALUES (1,'sarah','admin','admin'),(2,'marcus','client','948fe603f61dc036b5c596dc09fe3ce3f3d30dc90f024c85f3c82db2ccab679d'),(3,'lala','client','948fe603f61dc036b5c596dc09fe3ce3f3d30dc90f024c85f3c82db2ccab679d'),(5,'Marieee','client','948fe603f61dc036b5c596dc09fe3ce3f3d30dc90f024c85f3c82db2ccab679d'),(6,'MGD','client','948fe603f61dc036b5c596dc09fe3ce3f3d30dc90f024c85f3c82db2ccab679d'),(7,'scarabee','client','948fe603f61dc036b5c596dc09fe3ce3f3d30dc90f024c85f3c82db2ccab679d');
+INSERT INTO `utilisateur` VALUES (1,'sarah','admin','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'),(2,'marcus','client','948fe603f61dc036b5c596dc09fe3ce3f3d30dc90f024c85f3c82db2ccab679d'),(3,'lala','client','948fe603f61dc036b5c596dc09fe3ce3f3d30dc90f024c85f3c82db2ccab679d'),(5,'Marieee','client','948fe603f61dc036b5c596dc09fe3ce3f3d30dc90f024c85f3c82db2ccab679d'),(6,'MGD','client','948fe603f61dc036b5c596dc09fe3ce3f3d30dc90f024c85f3c82db2ccab679d'),(7,'scarabee','client','948fe603f61dc036b5c596dc09fe3ce3f3d30dc90f024c85f3c82db2ccab679d');
 /*!40000 ALTER TABLE `utilisateur` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -265,4 +266,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-20 16:03:33
+-- Dump completed on 2023-11-25 18:54:05
