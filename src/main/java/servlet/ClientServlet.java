@@ -19,9 +19,13 @@ public class ClientServlet extends HttpServlet {
         if (session != null && session.getAttribute("role") != null && session.getAttribute("role").equals("client")) {
             Client client = (Client) session.getAttribute("client");
 
-            String modifierProduit = client.getDroit().equals(Droit.aucun.toString()) ? "" : "<hr><div>\n" +
-                    "        <h2>Vos droits</h2><a href=\"editProducts.jsp\"><button>Modifier Produit</button></a></p>\n" +
-                    "    </div>" ;
+            String modifierProduit ="";
+
+            if(client.getDroit()!=null && client.getDroit().equals(Droit.aucun.toString())) {
+                modifierProduit="<hr><div>\n" +
+                        "        <h2>Vos droits</h2><a href=\"editProducts.jsp\"><button>Modifier Produit</button></a></p>\n" +
+                        "    </div>";
+            }
 
             session.setAttribute("modifierProduit", modifierProduit);
             client.chargerCompteBancaire();
