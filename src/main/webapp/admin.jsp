@@ -65,7 +65,7 @@
                     <option value="aucun" <%= client.getDroit().equals("aucun") ? "selected" : "" %>>Aucun</option>
                     <option value="modification" <%= client.getDroit().equals("modification") ? "selected" : "" %>>Modification</option>
                     <option value="ajout" <%= client.getDroit().equals("ajout") ? "selected" : "" %>>Ajout</option>
-                    <option value="supp" <%= client.getDroit().equals("supp") ? "selected" : "" %>>Suppression</option>
+                    <option value="suppression" <%= client.getDroit().equals("suppression") ? "selected" : "" %>>Suppression</option>
                     <option value="tout" <%= client.getDroit().equals("tout") ? "selected" : "" %>>Tout</option>
                 </select>
             </td>
