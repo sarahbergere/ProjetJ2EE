@@ -12,8 +12,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
@@ -104,7 +102,7 @@ public class RegisterServlet extends HttpServlet {
                     "Merci de faire partie de notre communauté !\n" +
                     "\n" +
                     "Cordialement,\n" +
-                    "[Votre Entreprise/Nom de l'Application]\n");
+                    "Notre Marketplace\n");
             email.addTo(emailclient);
             email.send();
         } catch (EmailException e) {

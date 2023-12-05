@@ -50,8 +50,7 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/AccountServlet");
                 return;
             }
-        } catch (
-        NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
 
