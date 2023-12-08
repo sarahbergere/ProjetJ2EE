@@ -152,7 +152,7 @@ DROP TABLE IF EXISTS `detailcommande`;
 CREATE TABLE `detailcommande` (
   `idDetailCommande` int NOT NULL AUTO_INCREMENT,
   `CommandeId` int NOT NULL,
-  `ProduitId` int NOT NULL,
+  `ProduitId` int DEFAULT NULL,
   `Quantite` int NOT NULL,
   PRIMARY KEY (`idDetailCommande`),
   KEY `CommandeID_idx` (`CommandeId`),
@@ -182,7 +182,7 @@ DROP TABLE IF EXISTS `paiement`;
 CREATE TABLE `paiement` (
   `idPaiement` int NOT NULL AUTO_INCREMENT,
   `CommandeID` int NOT NULL,
-  `CompteBancaireID` int NOT NULL,
+  `CompteBancaireID` int DEFAULT NULL,
   `Montant` decimal(10,2) NOT NULL,
   `Date` date NOT NULL,
   PRIMARY KEY (`idPaiement`),
