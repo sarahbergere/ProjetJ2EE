@@ -26,3 +26,10 @@ Attention : Veuillez à bien importer la base de donnée dans Workbench MySQL ->
 - [X] Page Admin
 - [X] Ajout et Suppression de compte bancaire pour les clients
 - [X] Envoie de mail à l'inscription et à la validation de commande 
+
+
+## Auteurs 
+
+Fait par Sarah BERGERE, Florian GAULLIER, Matéo GENTEL-DEHENNE et Marcus NDEUGOUE
+ING 2 GSI Groupe 3
+CY TECH 
