@@ -4,7 +4,7 @@ Ce projet est une application de commerce en ligne développée en utilisant Jav
 
 ## Prérequis
 
-Avant de commencer, assurez-vous d'avoir installé les outils suivants :
+Ce projet fonctionne et a été testé avec les outils suivant : 
 
 - Java JDK 17 ou version ultérieure
 - TomCat version 10.1.15
