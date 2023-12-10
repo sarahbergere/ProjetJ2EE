@@ -1,14 +1,13 @@
 package dao;
+import entity.DetailCommande;
 import entity.Produit;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class ProduitDAO {
-
+    private static final Logger logger = Logger.getLogger(ProduitDAO.class.getName());
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Persistence");
 
     public void create(Produit produit) {
@@ -54,14 +53,36 @@ public class ProduitDAO {
         }
     }
 
-    public void delete(Produit produit) {
+    public boolean delete(Produit produit) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
 
+        boolean isDeleted = false;
+
         try {
             transaction.begin();
+
+            List<DetailCommande> detailsBefore = entityManager.createQuery(
+                            "SELECT d FROM DetailCommande d WHERE d.produit = :produit", DetailCommande.class)
+                    .setParameter("produit", produit)
+                    .getResultList();
+            logger.info("Details before update: " + detailsBefore);
+
+            String jpqlUpdate = "UPDATE DetailCommande d SET d.produit = null WHERE d.produit.id = :productId";
+            Query queryUpdate = entityManager.createQuery(jpqlUpdate);
+            queryUpdate.setParameter("productId", produit.getId());
+            queryUpdate.executeUpdate();
+
+            List<DetailCommande> detailsAfter = entityManager.createQuery(
+                            "SELECT d FROM DetailCommande d WHERE d.produit = :produit", DetailCommande.class)
+                    .setParameter("produit", produit)
+                    .getResultList();
+            logger.info("Details after update: " + detailsAfter);
+
             entityManager.remove(entityManager.contains(produit) ? produit : entityManager.merge(produit));
             transaction.commit();
+
+            isDeleted = true;
         } catch (Exception e) {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
@@ -70,7 +91,10 @@ public class ProduitDAO {
         } finally {
             entityManager.close();
         }
+
+        return isDeleted;
     }
+
 
     public List<Produit> findAll() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();

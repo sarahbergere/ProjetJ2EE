@@ -1,4 +1,6 @@
 <%@ page import="java.sql.*" %>
+<%@ page import="dao.ProduitDAO" %>
+<%@ page import="entity.Produit" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -19,43 +21,26 @@
 
 <div class="container">
     <%
-        String productName = request.getParameter("productName");
+        int idproduct = 0;
+        idproduct = Integer.parseInt(request.getParameter("idproduct"));
 
-        if (productName != null) {
+        if (idproduct != 0) {
             try {
-                // Définir les informations de connexion à la base de données
-                String url = "jdbc:mysql://localhost:3306/ecommerce";
-                String username = "root";
-                String password = "cytech0001";
+                ProduitDAO produitDAO = new ProduitDAO();
+                Produit produit = produitDAO.findById(idproduct);
 
-                // Charger le pilote JDBC
-                Class.forName("com.mysql.cj.jdbc.Driver");
+                boolean isDeleted = produitDAO.delete(produit);
 
-                // Établir la connexion à la base de données
-                Connection connection = DriverManager.getConnection(url, username, password);
-
-                // Créer la requête SQL pour supprimer le produit
-                String deleteQuery = "DELETE FROM Produit WHERE Nom = ?";
-                PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery);
-                preparedStatement.setString(1, productName);
-
-                // Exécuter la requête de suppression
-                int rowsAffected = preparedStatement.executeUpdate();
-
-                // Fermer les ressources
-                preparedStatement.close();
-                connection.close();
-
-                if (rowsAffected > 0) {
+                if (isDeleted) {
     %>
     <div class="success-message">
-        Le produit <%= productName %> a été supprimé avec succès.
+        Le produit <%= produit.getNom() %> a été supprimé avec succès.
     </div>
     <%
     } else {
     %>
     <div class="error-message">
-        Erreur lors de la suppression du produit <%= productName %>. Veuillez réessayer.
+        Erreur lors de la suppression du produit <%= produit.getNom() %>. Veuillez réessayer.
     </div>
     <%
                 }

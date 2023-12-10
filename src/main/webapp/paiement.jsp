@@ -8,9 +8,6 @@
     Client client = (Client) session.getAttribute("client");
     Map<Integer, Integer> panier = (Map<Integer, Integer>) session.getAttribute("panier");
 
-    if ((panier == null || panier.isEmpty()) || (client == null)) {
-        response.sendRedirect("panier.jsp");
-    }
 %>
 
 

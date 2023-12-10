@@ -9,8 +9,8 @@
         function redirectToEdit(productName){
             window.location.href = "edit.jsp?productName=" + encodeURIComponent(productName);
         }
-        function redirectToDeleteProduct(productName) {
-            window.location.href = "deleteProduct.jsp?productName=" + encodeURIComponent(productName);
+        function redirectToDeleteProduct(id) {
+            window.location.href = "deleteProduct.jsp?idproduct=" + encodeURIComponent(id);
         }
         function redirectToAddProduit() {
             window.location.href = "addProduit.jsp";
@@ -53,6 +53,7 @@
 
 
         while (resultSet.next()) {
+            int id = resultSet.getInt("idproduit");
             String nom = resultSet.getString("Nom");
             double prix = resultSet.getDouble("Prix");
             int stock = resultSet.getInt("Stock");
@@ -69,7 +70,7 @@
         <% }
         if("suppression".equals(droit) || "tout".equals(droit)){ %>
             <br>
-            <button type="button" onclick="redirectToDeleteProduct('<%= nom %>')">Supprimer</button>
+            <button type="button" onclick="redirectToDeleteProduct('<%= id %>')">Supprimer</button>
         <% } %>
     </div>
 

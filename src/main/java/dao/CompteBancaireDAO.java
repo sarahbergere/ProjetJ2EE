@@ -84,6 +84,11 @@ public class CompteBancaireDAO {
         try {
             transaction.begin();
 
+            String jpqlUpdate = "UPDATE Paiement p SET p.compteBancaireID = null WHERE p.compteBancaireID = :compteBancaireID";
+            Query queryUpdate = entityManager.createQuery(jpqlUpdate);
+            queryUpdate.setParameter("compteBancaireID", Integer.parseInt(id));
+            queryUpdate.executeUpdate();
+
             CompteBancaire compteBancaire = entityManager.find(CompteBancaire.class, Integer.parseInt(id));
             if( compteBancaire != null){
                 entityManager.remove(compteBancaire);
