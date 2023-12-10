@@ -8,6 +8,7 @@ Avant de commencer, assurez-vous d'avoir installé les outils suivants :
 
 - Java JDK 17 ou version ultérieure
 - TomCat version 10.1.15
+- Intellij IDEA 2023.2.5
 
 ## Configuration
 Vous pouvez configurer l'application en modifiant le fichier src/main/resources/application.properties pour y modifier votre nom d'utilisateur et votre mot de passe MySql.
