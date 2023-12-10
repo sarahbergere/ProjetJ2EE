@@ -31,5 +31,7 @@ Attention : Veuillez à bien importer la base de donnée dans Workbench MySQL ->
 ## Auteurs 
 
 Fait par Sarah BERGERE, Florian GAULLIER, Matéo GENTEL-DEHENNE et Marcus NDEUGOUE
+
 ING 2 GSI Groupe 3
+
 CY TECH 
