@@ -7,10 +7,7 @@ Ce projet est une application de commerce en ligne développée en utilisant Jav
 Avant de commencer, assurez-vous d'avoir installé les outils suivants :
 
 - Java JDK 17 ou version ultérieure
-- Apache Maven
-- Spring Boot
 - TomCat version 10.1.15
-
 
 ## Configuration
 Vous pouvez configurer l'application en modifiant le fichier src/main/resources/application.properties pour y modifier votre nom d'utilisateur et votre mot de passe MySql.
