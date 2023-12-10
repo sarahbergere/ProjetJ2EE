@@ -6,7 +6,7 @@
     <title>Marketplace</title>
     <link rel="stylesheet" type="text/css" href="style.CSS">
     <script>
-        function redirectToEdit(productName) {
+        function redirectToEdit(productName){
             window.location.href = "edit.jsp?productName=" + encodeURIComponent(productName);
         }
         function redirectToDeleteProduct(productName) {
