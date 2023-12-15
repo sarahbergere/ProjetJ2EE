@@ -33,6 +33,12 @@ Attention : Veuillez à bien importer la base de donnée dans Workbench MySQL ->
 
 5. Profitez de l'expérience d'achat en ligne !
 
+### Mot de passe des comptes existant
+
+Pour tous les comptes clients le mot de passe est "client". 
+Pour avoir accès au compte admin, il suffit de mettre le pseudo "sarah" et le mot de passe "admin". 
+
+
 ### Dépannage
 
 - Consultez la console de l'application pour les messages de journalisation ou d'erreur lors du démarrage.
